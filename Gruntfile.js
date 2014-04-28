@@ -36,7 +36,6 @@ module.exports = function (grunt) {
         resetTasks = [
             // clean build directory
             'clean:build',
-
             // cleans previous generated release
             'clean:release'
         ],
@@ -44,81 +43,59 @@ module.exports = function (grunt) {
         releaseTasks = [
             // clean build directory
             'clean:build',
-
             // copies assets and js over to build dir
             'copy:srcToBuild',
-
             // compiles less
             'less:buildCSS',
-
             // auto prefix docs files
             'autoprefixer:prefixDocs',
-
             // auto prefix build files
             'autoprefixer:prefixBuild',
-
             // creates minified js of each file
             'uglify:minifyJS',
-
             // creates minified css of each file
             'cssmin:minifyCSS',
-
             // create concatenated css release
             'concat:createCSSPackage',
-
             // create concatenated js release
             'concat:createJSPackage',
-
             // creates release js of all together
             'uglify:createMinJSPackage',
-
             // creates custom license in header
             'cssmin:createMinCSSPackage',
-
             // create npm package
             'copy:npm',
-
             // replace $.fn.xyz with module.exports and require('jquery')
             'replace:npm',
-
             // cleans previous generated release
             'clean:release'
-
         ],
 
         rtlTasks = [
             // copies assets to rtl
             'copy:buildToRTL',
-
             // create rtl release
             'cssjanus:rtl'
         ],
 
         docTasks = [
-
             // copies examples over to docs
             'copy:examplesToDocs',
-
             // creates release zip
             'compress:everything',
-
             // copies files over to docs
             'copy:buildToDocs',
-
             // generate code docs
             'docco:generate',
-
             // copies spec files over to docs
             'copy:specToDocs'
         ],
 
-    // online #feeloc#
-        copyToStaticsTask = [
+        copyToStaticsTask = [   // online #feeloc#
             'copy:buildToStatics'
         ],
 
-    // debug #feeloc#
-        copyToDebugTask = [
+        copyToDebugTask = [ // debug #feeloc#
             'copy:debugToStatics'
         ],
 
@@ -146,9 +123,7 @@ module.exports = function (grunt) {
         },
 
         setWatchFiles = function (action, filePath) {
-            var
-                buildPath = filePath.replace('src/', 'docs/build/uncompressed/').replace('less', 'css')
-                ;
+            var buildPath = filePath.replace('src/', 'docs/build/uncompressed/').replace('less', 'css');
 
             if (filePath.search('.less') !== -1) {
                 grunt.config('less.buildDocsCSS.src', filePath);
@@ -170,11 +145,9 @@ module.exports = function (grunt) {
             return folder + filename.substring(0, filename.lastIndexOf('.')) + '.min.css';
         },
 
-        config
-        ;
+        config;
 
     config = {
-
         package: grunt.file.readJSON('package.json'),
         custom: grunt.file.readJSON('custom.json'),
 
@@ -580,6 +553,19 @@ module.exports = function (grunt) {
                         dest: '../slatecms/debug'
                     }
                 ]
+            },
+
+            seajs: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/collections/',
+                        src: [
+                            '*'
+                        ],
+                        dest: 'src/slate'
+                    }
+                ]
             }
 
         },
@@ -746,13 +732,15 @@ module.exports = function (grunt) {
 
         sync: {
             main: {
-                files: [{
-                    cwd: 'build',
-                    src: [
-                        'uncompressed/*/*'
-                    ],
-                    dest: '../slatecms/debug'
-                }],
+                files: [
+                    {
+                        cwd: 'build',
+                        src: [
+                            'uncompressed/*/*'
+                        ],
+                        dest: '../slatecms/debug'
+                    }
+                ],
                 verbose: true // Display log messages when copying files
             }
         }
@@ -777,6 +765,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma-coveralls');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-sync');
+    grunt.loadNpmTasks('grunt-cmd-build');
 
     grunt.initConfig(config);
 
