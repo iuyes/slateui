@@ -577,7 +577,7 @@ module.exports = function (grunt) {
                         src: [
                             '*/*'
                         ],
-                        dest: '../statics/debug'
+                        dest: '../slatecms/debug'
                     }
                 ]
             }
@@ -742,6 +742,19 @@ module.exports = function (grunt) {
             options: {
                 coverage_dir: 'coverage'
             }
+        },
+
+        sync: {
+            main: {
+                files: [{
+                    cwd: 'build',
+                    src: [
+                        'uncompressed/*/*'
+                    ],
+                    dest: '../slatecms/debug'
+                }],
+                verbose: true // Display log messages when copying files
+            }
         }
 
     };
@@ -763,6 +776,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-karma-coveralls');
     grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-sync');
 
     grunt.initConfig(config);
 

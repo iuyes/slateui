@@ -43,6 +43,7 @@
     "karma-jasmine": "~0.1.0",
     "karma-phantomjs-launcher": "x.x.x",
     "karma-spec-reporter": "x.x.x",
-    "grunt-sync": "0.0.7"
+    "grunt-sync": "0.0.7",
+    "grunt-shell": "^0.7.0"
   }
 }
