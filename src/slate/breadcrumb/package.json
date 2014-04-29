@@ -19,7 +19,6 @@
   "licenses": "MIT",
   "spm": {
     "output": [
-      "breadcrumb.js",
       "breadcrumb.css"
     ],
     "alias": {},

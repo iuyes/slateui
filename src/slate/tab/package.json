@@ -1,0 +1,29 @@
+{
+  "family": "slate",
+  "name": "tab",
+  "version": "1.0.0",
+  "description": "tab slate ui",
+  "homepage": "https://github.com/feeloc/slateui",
+  "author": "feeloc",
+  "maintainers": [
+    "feeloc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feeloc/slateui.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "licenses": "MIT",
+  "spm": {
+    "output": [
+      "tab.js",
+      "tab.css"
+    ],
+    "alias": {},
+    "devAlias": {},
+    "engines": {}
+  }
+}

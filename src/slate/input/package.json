@@ -1,0 +1,28 @@
+{
+  "family": "slate",
+  "name": "input",
+  "version": "1.0.0",
+  "description": "input slate ui",
+  "homepage": "https://github.com/feeloc/slateui",
+  "author": "feeloc",
+  "maintainers": [
+    "feeloc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feeloc/slateui.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "licenses": "MIT",
+  "spm": {
+    "output": [
+      "input.css"
+    ],
+    "alias": {},
+    "devAlias": {},
+    "engines": {}
+  }
+}
