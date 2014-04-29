@@ -9,8 +9,8 @@
  *
  */
 
-;(function ( $, window, document, undefined ) {
-
+define(function (require, exports, module) {
+    var $ = require('$');
 $.fn.sidebar = function(parameters) {
   var
     $allModules    = $(this),
@@ -511,4 +511,4 @@ $.fn.sidebar.settings = {
 
 };
 
-})( jQuery, window , document );
+});
