@@ -1,0 +1,28 @@
+{
+  "family": "slate",
+  "name": "list",
+  "version": "1.0.0",
+  "description": "list slate ui",
+  "homepage": "https://github.com/feeloc/slateui",
+  "author": "feeloc",
+  "maintainers": [
+    "feeloc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feeloc/slateui.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "licenses": "MIT",
+  "spm": {
+    "output": [
+      "list.css"
+    ],
+    "alias": {},
+    "devAlias": {},
+    "engines": {}
+  }
+}
