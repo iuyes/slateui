@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <% for (var i = 0;i < global.slateUI.length; i++){ %>
+    <link type="text/css" rel="stylesheet" href="<%= global.slateUI[i] %>">
+    <% } %>
+</head>
+<body style="display: none">
+<div class="wrapper">
+    <div class="slate-cms login-box">
+        <div class="ui form segment">
+            <div class="field">
+                <label>Username</label>
+
+                <div class="ui left labeled icon input">
+                    <input type="text" placeholder="Username">
+                    <i class="user icon"></i>
+
+                    <div class="ui corner label">
+                        <i class="icon asterisk"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>Password</label>
+
+                <div class="ui left labeled icon input">
+                    <input type="password">
+                    <i class="lock icon"></i>
+
+                    <div class="ui corner label">
+                        <i class="icon asterisk"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="ui error message">
+                <div class="header">We noticed some issues</div>
+            </div>
+            <div class="ui blue submit button">Login</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        alias: {
+            "$": "jquery/jquery/2.1.0/jquery",
+            "cms.base.js": "slate/cms-base/1.0.0/cms-base"
+        }
+    });
+    seajs.use(['$'], function ($, Accordion, CmsBase) {
+        $('body').show();
+        $(function () {
+            CmsBase();
+        });
+    });
+</script>
+</body>
+</html>

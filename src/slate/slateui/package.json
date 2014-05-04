@@ -1,0 +1,28 @@
+{
+  "family": "slate",
+  "name": "slateui",
+  "version": "1.0.0",
+  "description": "all in one slate ui",
+  "homepage": "https://github.com/feeloc/slateui",
+  "author": "feeloc",
+  "maintainers": [
+    "feeloc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feeloc/slateui.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "licenses": "MIT",
+  "spm": {
+    "output": [
+      "slateui.css"
+    ],
+    "alias": {},
+    "devAlias": {},
+    "engines": {}
+  }
+}
