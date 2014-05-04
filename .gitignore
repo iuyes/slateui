@@ -4,6 +4,7 @@ node_modules/
 custom.json
 slateui.iml
 
+src/css/cms/*.css
 
 src/slate/accordion/src/accordion.css
 src/slate/basicicon/src/basicicon.css

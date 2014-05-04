@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <title>登录</title>
     <% for (var i = 0;i < global.slateUI.length; i++){ %>
-    <link type="text/css" rel="stylesheet" href="<%= global.slateUI[i] %>">
+    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %><%= global.slateUI[i] %>">
     <% } %>
+    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %>/css/cms/login.css">
 </head>
-<body style="display: none">
-<div class="wrapper">
+<body>
+<div class="slate-cms wrapper">
     <div class="slate-cms login-box">
         <div class="ui form segment">
             <div class="field">
-                <label>Username</label>
+                <label>用户名</label>
 
                 <div class="ui left labeled icon input">
-                    <input type="text" placeholder="Username">
+                    <input type="text">
                     <i class="user icon"></i>
 
                     <div class="ui corner label">
@@ -25,7 +26,7 @@
                 </div>
             </div>
             <div class="field">
-                <label>Password</label>
+                <label>密码</label>
 
                 <div class="ui left labeled icon input">
                     <input type="password">
@@ -39,7 +40,7 @@
             <div class="ui error message">
                 <div class="header">We noticed some issues</div>
             </div>
-            <div class="ui blue submit button">Login</div>
+            <div class="ui blue submit button">登录</div>
         </div>
     </div>
 </div>
@@ -48,11 +49,11 @@
     seajs.config({
         alias: {
             "$": "jquery/jquery/2.1.0/jquery",
-            "cms.base.js": "slate/cms-base/1.0.0/cms-base"
+            "cms.base.js": "slate/cms-base/1.0.0/cms-base",
+            "cms.login.css": "css/cms/login.css"
         }
     });
-    seajs.use(['$'], function ($, Accordion, CmsBase) {
-        $('body').show();
+    seajs.use(['$', 'cms.base.js', 'cms.login.css'], function ($, CmsBase) {
         $(function () {
             CmsBase();
         });

@@ -1,9 +1,10 @@
-define(function(require, exports, module) {
+define(function (require, exports, module) {
+    var $ = require('$');
 
-  var cmsBase = function(){
-      alert(1);
-  };
+    var cmsBase = function () {
 
-  module.exports = cmsBase;
+    };
+
+    module.exports = cmsBase;
 
 });

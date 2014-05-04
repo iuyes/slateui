@@ -16,7 +16,6 @@ module.exports = {
         "/ui/chatroom/src/chatroom.css",
         "/ui/checkbox/src/checkbox.css",
         "/ui/cms-base/src/cms-base.css",
-        "/ui/cms-login/src/cms-login.css",
         "/ui/comment/src/comment.css",
         "/ui/dimmer/src/dimmer.css",
         "/ui/divider/src/divider.css",
