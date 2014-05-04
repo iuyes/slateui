@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title></title>
+    <% for (var i = 0;i < global.slateUI.length; i++){ %>
+    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %> <%= global.slateUI[i] %>">
+    <% } %>
+    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %>/css/cms/login.css">
+</head>
+<body>
+<header class="slate-cms header">
+    <div class="wrapper">
+        <h1 class="small-logo"></h1>
+        <div class="user-status">
+            <a class="ui image label account" data-content="账号设置">
+                <img src="http://semantic-ui.com/images/demo/photo2.jpg">
+                <span>你好</span>
+                <span class="login-name">王欣</span>
+            </a>
+        </div>
+    </div>
+</header>
+<div class="slate-cms wrapper">
+    <i class="heart icon" title="Hello I am a popup"></i>
+</div>
+<script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
+<script type="text/javascript" src="<%= global.staticDomain %>/js/cms/app-list.js"></script>
+</body>
+</html>

@@ -2,9 +2,9 @@
  * Created by hujianmeng on 14-5-4.
  */
 
-exports.login = function (req, res, next) {
+exports.list = function (req, res, next) {
     if (req.method == 'GET') {
-        res.render('login');
+        res.render('app-list');
     } else {
         var username = req.body.username,
             password = req.body.password;

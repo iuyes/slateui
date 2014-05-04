@@ -5,6 +5,10 @@ define(function (require, exports, module) {
 
     };
 
-    module.exports = cmsBase;
+    cmsBase.prototype.urls = {
+        login: '/login'
+    }
+
+    module.exports = new cmsBase();
 
 });
