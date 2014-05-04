@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>登录</title>
     <% for (var i = 0;i < global.slateUI.length; i++){ %>
-    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %><%= global.slateUI[i] %>">
+    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %> <%= global.slateUI[i] %>">
     <% } %>
     <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %>/css/cms/login.css">
 </head>
@@ -45,19 +45,6 @@
     </div>
 </div>
 <script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
-<script type="text/javascript">
-    seajs.config({
-        alias: {
-            "$": "jquery/jquery/2.1.0/jquery",
-            "cms.base.js": "slate/cms-base/1.0.0/cms-base",
-            "cms.login.css": "css/cms/login.css"
-        }
-    });
-    seajs.use(['$', 'cms.base.js', 'cms.login.css'], function ($, CmsBase) {
-        $(function () {
-            CmsBase();
-        });
-    });
-</script>
+<script type="text/javascript" src="<%= global.staticDomain %>/js/cms/login.js"></script>
 </body>
 </html>
