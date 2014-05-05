@@ -12,5 +12,15 @@ seajs.config({
 seajs.use(['$', 'cms.base.js', 'easing', 'popup', 'app.list.css'], function ($, cmsBase) {
     $(function () {
         $('.sign-out,.account-settings').popup();
+        $('.app-name').click(function () {
+            var $thisSubMenu = $(this).parent().find('.menu');
+            if (!$thisSubMenu.is(':visible')) {
+                $('.list-left .item .menu').each(function(){
+                    $(this).hide();
+                });
+            }
+            $(this).addClass('active');
+            $thisSubMenu.show();
+        });
     })
 });
