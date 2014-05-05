@@ -15,7 +15,6 @@ module.exports = {
         "/ui/button/src/button.css",
         "/ui/chatroom/src/chatroom.css",
         "/ui/checkbox/src/checkbox.css",
-        "/ui/cms-base/src/cms-base.css",
         "/ui/comment/src/comment.css",
         "/ui/dimmer/src/dimmer.css",
         "/ui/divider/src/divider.css",
@@ -48,6 +47,7 @@ module.exports = {
         "/ui/tab/src/tab.css",
         "/ui/table/src/table.css",
         "/ui/transition/src/transition.css",
-        "/ui/video/src/video.css"
+        "/ui/video/src/video.css",
+        "/ui/cms-base/src/cms-base.css"
     ]
 }

@@ -7,20 +7,35 @@
     <% for (var i = 0;i < global.slateUI.length; i++){ %>
     <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %> <%= global.slateUI[i] %>">
     <% } %>
-    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %>/css/cms/login.css">
 </head>
 <body>
 <header class="slate-cms header">
     <div class="wrapper">
         <h1 class="small-logo"></h1>
-        <div class="user-status">
-            <span>你好</span>
-            <span class="login-name">哈哈</span>
-        </div>
+        <ul class="user-links">
+            <li>
+                <a class="name">
+                    你好
+                    <span class="username">feeloc</span>
+                </a>
+            </li>
+
+            <li>
+                <a data-title="设置" class="account-settings">
+                    <i class="settings icon"></i>
+                </a>
+            </li>
+            <li>
+                <a data-title="退出" class="sign-out">
+                    <i class="sign out icon"></i>
+                </a>
+            </li>
+
+        </ul>
     </div>
 </header>
 <div class="slate-cms wrapper">
-    <i class="heart icon" title="Hello I am a popup"></i>
+
 </div>
 <script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
 <script type="text/javascript" src="<%= global.staticDomain %>/js/cms/app-list.js"></script>
