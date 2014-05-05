@@ -8,9 +8,6 @@ seajs.config({
 
 seajs.use(['$', 'cms.base.js', 'popup'], function ($, cmsBase) {
     $(function () {
-        $('.icon').popup({
-            on: 'focus',
-            content: 'Hello I am a popup'
-        });
+
     });
 });
