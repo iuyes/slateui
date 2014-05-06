@@ -10,6 +10,8 @@
  */
 
 define(function (require, exports, module) {
+    require('slate/transition/1.0.0/transition');
+    require('jquery/easing/1.3.0/easing');
     var $ = require('$');
     $.fn.dropdown = function (parameters) {
         var
@@ -933,7 +935,7 @@ define(function (require, exports, module) {
     $.extend($.easing, {
         easeOutQuad: function (x, t, b, c, d) {
             return -c * (t /= d) * (t - 2) + b;
-        },
+        }
     });
 
 

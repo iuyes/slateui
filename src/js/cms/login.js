@@ -1,6 +1,7 @@
 seajs.config({
     alias: {
         "$": "jquery/jquery/2.1.0/jquery",
+        "jquery": "jquery/jquery/2.1.0/jquery",
         "cms.base.js": "slate/cms-base/1.0.0/cms-base",
         "validation": "slate/validation/1.0.0/validation",
         "cms.login.css": "css/cms/login.css"

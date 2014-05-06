@@ -9,71 +9,72 @@
 body {
   margin: 0;
   padding: 0;
+  background: #FCFCFC url("images/bg.jpg") repeat;
+  color: #555555;
 }
 
-.header .wrapper {
+.header .wrapper,.slate-cms.wrapper {
+  width: 98%;
   max-width: 1200px;
+  min-width: 1150px;
   margin: 0 auto;
 }
 
-.slate-cms.wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
+/**头部**/
 .slate-cms.header {
+  @background: #f9f9f9, #f3f3f3;
   height: 40px;
   background-color: #f3f3f3;
-  background-image: -moz-linear-gradient(#f9f9f9, #f3f3f3);
-  background-image: -webkit-linear-gradient(#f9f9f9, #f3f3f3);
-  background-image: linear-gradient(#f9f9f9, #f3f3f3);
+  background-image: -moz-linear-gradient(@background);
+  background-image: -webkit-linear-gradient(@background);
+  background-image: linear-gradient(@background);
   background-repeat: repeat-x;
   text-shadow: 0 1px 0 #fff;
   border-bottom: 1px solid #e5e5e5;
-}
 
-.header .small-logo {
-  float: left;
-  width: 160px;
-  height: 40px;
-  background: url("images/logo.png") no-repeat;
-  background-size: 160px 40px;
-  margin: 0;
-  padding: 0;
-}
+  .small-logo {
+    float: left;
+    width: 170px;
+    height: 40px;
+    background: url("images/logo.png") center no-repeat;
+    background-size: 170px 30px;
+    margin: 0;
+    padding: 0;
+  }
 
-.header .user-links {
-  float: right;
-  font-weight: bold;
-  line-height: 45px;
-  white-space: nowrap;
-  font-size: 14px;
-  color: #333333;
-  transition: color 0.1s ease-in;
-  -webkit-transition: color 0.1s ease-in 0;
-}
+  .user-links {
+    float: right;
+    font-weight: bold;
+    line-height: 45px;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #333333;
+    transition: color 0.1s ease-in;
+    -webkit-transition: color 0.1s ease-in 0;
 
-.header .user-links li {
-  float: left;
-  margin-left: 10px;
-  list-style: none;
-}
+    li {
+      float: left;
+      margin-left: 10px;
+      list-style: none;
+    }
 
-.header .user-links a {
-  text-decoration: none;
-  -webkit-font-smoothing: antialiased;
-  color: #333;
-}
+    a {
+      text-decoration: none;
+      -webkit-font-smoothing: antialiased;
+      color: #333;
+    }
 
-.header .username{
-  margin-right: 3px;
-}
+    .username{
+      margin-right: 3px;
+    }
 
-.header .user-links a.account-settings,.header .user-links a.sign-out {
-  font-size: 18px;
-  line-height: 20px;
-}
+    .account-settings,.sign-out {
+      font-size: 18px;
+      line-height: 20px;
+    }
 
-.header .user-links a.account-settings:hover,.header .user-links a.sign-out:hover {
-  color: @color;
+    .account-settings:hover,.sign-out:hover {
+      color: @color;
+    }
+  }
 }

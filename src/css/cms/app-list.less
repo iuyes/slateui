@@ -1,28 +1,94 @@
-.ui.popup .header{
+.ui.popup .header {
   padding: 0;
 }
 
-.tool-box{
+.tool-box {
   margin-top: 20px;
 }
 
-.list-box{
+.list-box {
+  @leftWidth: 20%;
+  @marginValue: 20px;
+
   position: relative;
-  margin-top: 20px;
-  padding-left: 22%;
-}
+  margin-top: @marginValue;
+  padding-left: (@leftWidth + 2%);
 
-.list-box .list-left{
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 20%;
-}
+  .list-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: @leftWidth;
 
-.list-left .menu a{
-  text-decoration: none;
-}
+    .item a {
+      display: block;
+      text-decoration: none;
+    }
 
-.list-left .item .menu{
-  display: none;
+    .item .menu {
+      display: none;
+    }
+
+    .ui.vertical.menu{
+      width: 100%;
+    }
+  }
+
+  .list-right {
+    .article-list-box {
+      margin-top: @marginValue;
+
+      .button{
+        display: block;
+        width: 100px;
+        margin: 5px 0;
+      }
+
+      p{
+        font-size: 14px;
+        line-height: 25px;
+      }
+
+      .each-article{
+        margin-bottom: 10px;
+      }
+      
+      .each-article .article-title{
+        height: 25px;
+        overflow: hidden;
+      }
+
+      table tr td:nth-child(1){
+        width: 10%;
+      }
+
+      table tr td:nth-child(2){
+        width: 10%;
+      }
+
+      table tr td:nth-child(3){
+        width: 13%;
+      }
+    }
+
+    .article-list-bottom{
+      margin-bottom: @marginValue;
+    }
+
+    .search-article-box{
+      margin-top: @marginValue;
+
+      input{
+        width: 100px;
+      }
+
+      .ui.selection.dropdown{
+        padding: 0.55em 1em;
+      }
+    }
+
+    .article-search-box{
+      margin-top: @marginValue;
+    }
+  }
 }
