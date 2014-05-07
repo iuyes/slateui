@@ -153,37 +153,40 @@
 
     <div class="search-article-box">
         <div class="ui form segment">
-            <input type="text" placeholder="开始时间">
-            <input type="text" placeholder="结束时间">
-            <input type="text" placeholder="文章ID">
-            <input type="text" placeholder="栏目">
-            <input type="text" placeholder="作者">
-            <input type="text" placeholder="关键字">
+            <div class="line">
+                <input type="text" placeholder="开始时间">
+                <input type="text" placeholder="结束时间">
+                <input type="text" placeholder="文章ID">
 
-            <div class="ui selection dropdown">
-                <input type="hidden" name="article-type">
+                <input type="text" placeholder="作者">
+                <input type="text" placeholder="关键字">
+            </div>
+            <div class="line line-two">
+                <select class="select-column" multiple placeholder="选择栏目"></select>
+                <div class="ui selection dropdown">
+                    <input type="hidden" name="article-type">
 
-                <div class="default text">类型</div>
-                <i class="dropdown icon"></i>
+                    <div class="default text">类型</div>
+                    <i class="dropdown icon"></i>
 
-                <div class="menu">
-                    <div class="item" data-value="1">普通文章</div>
-                    <div class="item" data-value="0">视频文章</div>
+                    <div class="menu">
+                        <div class="item" data-value="1">普通文章</div>
+                        <div class="item" data-value="0">视频文章</div>
+                    </div>
+                </div>
+                <div class="ui selection dropdown">
+                    <input type="hidden" name="article-type">
+
+                    <div class="default text">状态</div>
+                    <i class="dropdown icon"></i>
+
+                    <div class="menu">
+                        <div class="item" data-value="1">编辑中</div>
+                        <div class="item" data-value="0">已发布</div>
+                    </div>
                 </div>
             </div>
-            <div class="ui selection dropdown">
-                <input type="hidden" name="article-type">
-
-                <div class="default text">状态</div>
-                <i class="dropdown icon"></i>
-
-                <div class="menu">
-                    <div class="item" data-value="1">编辑中</div>
-                    <div class="item" data-value="0">已发布</div>
-                </div>
-            </div>
-
-            <div class="ui blue small submit button">搜索</div>
+            <div class="ui blue small submit button search-btn">搜索</div>
         </div>
     </div>
 
@@ -338,6 +341,9 @@
 </div>
 <!--添加栏目结束-->
 
+<!--选择类别开始-->
+
+<!--选择类别结束-->
 <script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
 <script type="text/javascript" src="<%= global.staticDomain %>/js/cms/app-list.js"></script>
 </body>

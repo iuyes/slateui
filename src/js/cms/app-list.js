@@ -1,18 +1,30 @@
 seajs.config({
     alias: {
-        "$": "jquery/jquery/2.1.0/jquery",
-        "jquery": "jquery/jquery/2.1.0/jquery",
-        "checkbox": "slate/checkbox/1.0.0/checkbox",
-        "dropdown": "slate/dropdown/1.0.0/dropdown",
-        "modal": "slate/modal/1.0.0/modal",
-        "pagination": "slate/pagination/1.0.0/pagination",
-        "cms.base.js": "slate/cms-base/1.0.0/cms-base",
-        "app.list.css": "css/cms/app-list.css"
+        '$': 'jquery/jquery/2.1.0/jquery',
+        'jquery': 'jquery/jquery/2.1.0/jquery',
+        'checkbox': 'slate/checkbox/1.0.0/checkbox',
+        'dropdown': 'slate/dropdown/1.0.0/dropdown',
+        'modal': 'slate/modal/1.0.0/modal',
+        'pagination': 'slate/pagination/1.0.0/pagination',
+        'cms.base.js': 'slate/cms-base/1.0.0/cms-base',
+        'app.list.css': 'css/cms/app-list.css',
+        'selectize': 'jquery/selectize/0.6.13/selectize',
+        'selectize.css': 'jquery/selectize/0.6.13/selectize.css'
     }
 });
 
-seajs.use(['$', 'cms.base.js', 'modal', 'pagination', 'checkbox', 'dropdown', 'app.list.css'], function ($, cmsBase) {
-
+seajs.use(
+    [
+        '$',
+        'cms.base.js',
+        'modal',
+        'pagination',
+        'checkbox',
+        'dropdown',
+        'selectize',
+        'app.list.css',
+        'selectize.css'
+    ], function ($, cmsBase) {
     /**
      * 应用列表
      * @constructor
@@ -25,6 +37,16 @@ seajs.use(['$', 'cms.base.js', 'modal', 'pagination', 'checkbox', 'dropdown', 'a
                     .checkbox();
                 $('.ui.dropdown')
                     .dropdown({width: 200});
+                $('.select-column').selectize({
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: ['name', 'id'],
+                    options: [
+                        {id: '1', name: '栏目一'},
+                        {id: '2', name: '栏目二'},
+                        {id: '3', name: '栏目三'}
+                    ]
+                }).next().show();
             };
             /**
              * 点击左侧按钮
