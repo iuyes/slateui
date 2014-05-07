@@ -12,7 +12,7 @@ exports.seajs = function (req, res, next) {
         req.url = url.replace(/\/ui/, '/slate');
         next();
     } else if (url.match(/^\/(alice|jquery|seajs|zepto)/)) {
-        res.redirect(301, config.proStaticDomain + url);
+        res.redirect(config.proStaticDomain + url);
     } else {
         next();
     }

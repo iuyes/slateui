@@ -29,7 +29,7 @@
       display: none;
     }
 
-    .ui.vertical.menu{
+    .ui.vertical.menu {
       width: 100%;
     }
   }
@@ -38,56 +38,80 @@
     .article-list-box {
       margin-top: @marginValue;
 
-      .button{
+      .button {
         display: block;
         width: 100px;
         margin: 5px 0;
       }
 
-      p{
+      p {
         font-size: 14px;
         line-height: 25px;
       }
 
-      .each-article{
+      .each-article {
         margin-bottom: 10px;
       }
-      
-      .each-article .article-title{
+
+      .each-article .article-title {
         height: 25px;
         overflow: hidden;
       }
 
-      table tr td:nth-child(1){
+      table tr td:nth-child(1) {
         width: 10%;
       }
 
-      table tr td:nth-child(2){
+      table tr td:nth-child(2) {
         width: 10%;
       }
 
-      table tr td:nth-child(3){
+      table tr td:nth-child(3) {
         width: 13%;
       }
+
+      table tr td:nth-child(8) {
+        width: 16%;
+      }
     }
 
-    .article-list-bottom{
-      margin-bottom: @marginValue;
-    }
+    .article-list-bottom {
+      margin: @marginValue 0 0;
+      padding: 0 0 @marginValue;
 
-    .search-article-box{
-      margin-top: @marginValue;
-
-      input{
-        width: 100px;
+      .tool-box, .go-page-box {
+        margin: 0em;
+        display: inline-block;
+        vertical-align: middle;
       }
 
-      .ui.selection.dropdown{
+      .left {
+        float: left;
+      }
+
+      .right {
+        float: right;
+      }
+
+      .go-page-box input {
+        width: 90px;
         padding: 0.55em 1em;
       }
     }
 
-    .article-search-box{
+    .search-article-box {
+      margin-top: @marginValue;
+
+      input {
+        width: 100px;
+      }
+
+      .ui.selection.dropdown {
+        padding: 0.55em 1em;
+      }
+    }
+
+    .article-search-box {
       margin-top: @marginValue;
     }
   }

@@ -7,6 +7,7 @@
     <% for (var i = 0;i < global.slateUI.length; i++){ %>
     <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %> <%= global.slateUI[i] %>">
     <% } %>
+    <!--<link type="text/css" rel="stylesheet" href="http://semantic-ui.com/build/packaged/css/semantic.min.css">-->
 </head>
 <body>
 <header class="slate-cms header">
@@ -158,10 +159,13 @@
             <input type="text" placeholder="栏目">
             <input type="text" placeholder="作者">
             <input type="text" placeholder="关键字">
+
             <div class="ui selection dropdown">
                 <input type="hidden" name="article-type">
+
                 <div class="default text">类型</div>
                 <i class="dropdown icon"></i>
+
                 <div class="menu">
                     <div class="item" data-value="1">普通文章</div>
                     <div class="item" data-value="0">视频文章</div>
@@ -169,8 +173,10 @@
             </div>
             <div class="ui selection dropdown">
                 <input type="hidden" name="article-type">
+
                 <div class="default text">状态</div>
                 <i class="dropdown icon"></i>
+
                 <div class="menu">
                     <div class="item" data-value="1">编辑中</div>
                     <div class="item" data-value="0">已发布</div>
@@ -265,34 +271,73 @@
         <% } %>
     </div>
     <div class="article-list-bottom">
-        <div class="ui pagination small menu">
-            <a class="icon item">
-                <i class="left arrow icon"></i>
-            </a>
-            <a class="active item">
-                1
-            </a>
-
-            <div class="disabled item">
-                ...
+        <div class="two fields fn-clear">
+            <div class="field tool-box left">
+                <div class="ui small blue button add-column-btn">
+                    批量添加栏目
+                </div>
+                <div class="ui small blue button">
+                    复制
+                </div>
             </div>
-            <a class="item">
-                10
-            </a>
-            <a class="item">
-                11
-            </a>
-            <a class="item">
-                12
-            </a>
-            <a class="icon item">
-                <i class="right arrow icon"></i>
-            </a>
+            <div class="field right">
+                <div class="app-list-page">
+
+                </div>
+                <div class="ui form go-page-box">
+                    <input type="text" placeholder="页码" class="current-page">
+                    <a class="ui small blue button">
+                        跳转
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 </div>
 </div>
+<footer>
+    copyright @ slate 2014
+</footer>
+<!--添加栏目开始-->
+<div class="ui modal small add-column-dialog">
+    <i class="close icon"></i>
+    <div class="header">
+        批量添加栏目
+    </div>
+    <div class="content">
+        <div class="ui selection dropdown">
+            <input type="hidden" name="gender">
+            <div class="default text">请选择栏目</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item" data-value="1">
+                    <div class="ui checkbox">
+                        <input type="checkbox">
+                        <label>这是一个栏目</label>
+                    </div>
+                </div>
+                <div class="item" data-value="0">
+                    <div class="ui checkbox">
+                        <input type="checkbox">
+                        <label>这是一个栏目</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black button">
+            取消
+        </div>
+        <div class="ui positive right labeled icon button">
+            确认
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+<!--添加栏目结束-->
+
 <script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
 <script type="text/javascript" src="<%= global.staticDomain %>/js/cms/app-list.js"></script>
 </body>

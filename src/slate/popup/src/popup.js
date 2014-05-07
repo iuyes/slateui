@@ -11,6 +11,8 @@
 
 define(function (require, exports, module) {
     var $ = require('$');
+    require('jquery/easing/1.3.0/easing');
+    require('slate/transition/1.0.0/transition');
     $.fn.popup = function (parameters) {
         var
             $allModules = $(this),
@@ -27,6 +29,7 @@ define(function (require, exports, module) {
 
             returnedValue
             ;
+
         $allModules
             .each(function () {
                 var
@@ -62,36 +65,36 @@ define(function (require, exports, module) {
 
                     element = this,
                     instance = $module.data(moduleNamespace),
-                    module
+                    moduleDom
                     ;
 
-                module = {
+                moduleDom = {
 
                     // binds events
                     initialize: function () {
-                        module.debug('Initializing module', $module);
+                        moduleDom.debug('Initializing moduleDom', $module);
                         if (settings.on == 'click') {
                             $module
-                                .on('click', module.toggle)
+                                .on('click', moduleDom.toggle)
                             ;
                         }
                         else {
                             $module
-                                .on(module.get.startEvent() + eventNamespace, module.event.start)
-                                .on(module.get.endEvent() + eventNamespace, module.event.end)
+                                .on(moduleDom.get.startEvent() + eventNamespace, moduleDom.event.start)
+                                .on(moduleDom.get.endEvent() + eventNamespace, moduleDom.event.end)
                             ;
                         }
                         if (settings.target) {
-                            module.debug('Target set to element', $target);
+                            moduleDom.debug('Target set to element', $target);
                         }
                         $window
-                            .on('resize' + eventNamespace, module.event.resize)
+                            .on('resize' + eventNamespace, moduleDom.event.resize)
                         ;
-                        module.instantiate();
+                        moduleDom.instantiate();
                     },
 
                     instantiate: function () {
-                        module.verbose('Storing instance of module', module);
+                        moduleDom.verbose('Storing instance of moduleDom', moduleDom);
                         instance = module;
                         $module
                             .data(moduleNamespace, instance)
@@ -109,7 +112,7 @@ define(function (require, exports, module) {
                     },
 
                     destroy: function () {
-                        module.debug('Destroying previous module');
+                        moduleDom.debug('Destroying previous moduleDom');
                         $window
                             .off(eventNamespace)
                         ;
@@ -124,28 +127,28 @@ define(function (require, exports, module) {
 
                     event: {
                         start: function (event) {
-                            module.timer = setTimeout(function () {
-                                if (module.is.hidden()) {
-                                    module.show();
+                            moduleDom.timer = setTimeout(function () {
+                                if (moduleDom.is.hidden()) {
+                                    moduleDom.show();
                                 }
                             }, settings.delay);
                         },
                         end: function () {
-                            clearTimeout(module.timer);
-                            if (module.is.visible()) {
-                                module.hide();
+                            clearTimeout(moduleDom.timer);
+                            if (moduleDom.is.visible()) {
+                                moduleDom.hide();
                             }
                         },
                         resize: function () {
-                            if (module.is.visible()) {
-                                module.set.position();
+                            if (moduleDom.is.visible()) {
+                                moduleDom.set.position();
                             }
                         }
                     },
 
                     // generates popup html from metadata
                     create: function () {
-                        module.debug('Creating pop-up html');
+                        moduleDom.debug('Creating pop-up html');
                         var
                             html = $module.data(metadata.html) || settings.html,
                             variation = $module.data(metadata.variation) || settings.variation,
@@ -165,14 +168,14 @@ define(function (require, exports, module) {
                                 .html(html)
                             ;
                             if (settings.inline) {
-                                module.verbose('Inserting popup element inline', $popup);
+                                moduleDom.verbose('Inserting popup element inline', $popup);
                                 $popup
                                     .data(moduleNamespace, instance)
                                     .insertAfter($module)
                                 ;
                             }
                             else {
-                                module.verbose('Appending popup element to body', $popup);
+                                moduleDom.verbose('Appending popup element to body', $popup);
                                 $popup
                                     .data(moduleNamespace, instance)
                                     .appendTo($context)
@@ -181,38 +184,38 @@ define(function (require, exports, module) {
                             $.proxy(settings.onCreate, $popup)();
                         }
                         else {
-                            module.error(error.content);
+                            moduleDom.error(error.content);
                         }
                     },
 
                     // determines popup state
                     toggle: function () {
-                        module.debug('Toggling pop-up');
-                        if (module.is.hidden()) {
-                            module.debug('Popup is hidden, showing pop-up');
-                            module.unbind.close();
-                            module.hideAll();
-                            module.show();
+                        moduleDom.debug('Toggling pop-up');
+                        if (moduleDom.is.hidden()) {
+                            moduleDom.debug('Popup is hidden, showing pop-up');
+                            moduleDom.unbind.close();
+                            moduleDom.hideAll();
+                            moduleDom.show();
                         }
                         else {
-                            module.debug('Popup is visible, hiding pop-up');
-                            module.hide();
+                            moduleDom.debug('Popup is visible, hiding pop-up');
+                            moduleDom.hide();
                         }
                     },
 
                     show: function (callback) {
                         callback = callback || function () {
                         };
-                        module.debug('Showing pop-up', settings.transition);
+                        moduleDom.debug('Showing pop-up', settings.transition);
                         if (!settings.preserve) {
-                            module.refresh();
+                            moduleDom.refresh();
                         }
-                        if (!module.exists()) {
-                            module.create();
+                        if (!moduleDom.exists()) {
+                            moduleDom.create();
                         }
-                        module.save.conditions();
-                        module.set.position();
-                        module.animate.show(callback);
+                        moduleDom.save.conditions();
+                        moduleDom.set.position();
+                        moduleDom.animate.show(callback);
                     },
 
 
@@ -222,10 +225,10 @@ define(function (require, exports, module) {
                         $module
                             .removeClass(className.visible)
                         ;
-                        module.restore.conditions();
-                        module.unbind.close();
-                        if (module.is.visible()) {
-                            module.animate.hide(callback);
+                        moduleDom.restore.conditions();
+                        moduleDom.unbind.close();
+                        if (moduleDom.is.visible()) {
+                            moduleDom.animate.hide(callback);
                         }
                     },
 
@@ -239,11 +242,11 @@ define(function (require, exports, module) {
                     hideGracefully: function (event) {
                         // don't close on clicks inside popup
                         if (event && $(event.target).closest(selector.popup).size() === 0) {
-                            module.debug('Click occurred outside popup hiding popup');
-                            module.hide();
+                            moduleDom.debug('Click occurred outside popup hiding popup');
+                            moduleDom.hide();
                         }
                         else {
-                            module.debug('Click was inside popup, keeping popup open');
+                            moduleDom.debug('Click was inside popup, keeping popup open');
                         }
                     },
 
@@ -257,7 +260,7 @@ define(function (require, exports, module) {
                     },
 
                     remove: function () {
-                        module.debug('Removing popup');
+                        moduleDom.debug('Removing popup');
                         $popup
                             .remove()
                         ;
@@ -265,20 +268,20 @@ define(function (require, exports, module) {
 
                     save: {
                         conditions: function () {
-                            module.cache = {
+                            moduleDom.cache = {
                                 title: $module.attr('title')
                             };
-                            if (module.cache.title) {
+                            if (moduleDom.cache.title) {
                                 $module.removeAttr('title');
                             }
-                            module.verbose('Saving original attributes', module.cache.title);
+                            moduleDom.verbose('Saving original attributes', moduleDom.cache.title);
                         }
                     },
                     restore: {
                         conditions: function () {
-                            if (module.cache && module.cache.title) {
-                                $module.attr('title', module.cache.title);
-                                module.verbose('Restoring original attributes', module.cache.title);
+                            if (moduleDom.cache && moduleDom.cache.title) {
+                                $module.attr('title', moduleDom.cache.title);
+                                moduleDom.verbose('Restoring original attributes', moduleDom.cache.title);
                             }
                             return true;
                         }
@@ -293,7 +296,7 @@ define(function (require, exports, module) {
                             if (settings.transition && $.fn.transition !== undefined && $module.transition('is supported')) {
                                 $popup
                                     .transition(settings.transition + ' in', settings.duration, function () {
-                                        module.bind.close();
+                                        moduleDom.bind.close();
                                         $.proxy(callback, element)();
                                     })
                                 ;
@@ -302,7 +305,7 @@ define(function (require, exports, module) {
                                 $popup
                                     .stop()
                                     .fadeIn(settings.duration, settings.easing, function () {
-                                        module.bind.close();
+                                        moduleDom.bind.close();
                                         $.proxy(callback, element)();
                                     })
                                 ;
@@ -312,11 +315,11 @@ define(function (require, exports, module) {
                         hide: function (callback) {
                             callback = callback || function () {
                             };
-                            module.debug('Hiding pop-up');
+                            moduleDom.debug('Hiding pop-up');
                             if (settings.transition && $.fn.transition !== undefined && $module.transition('is supported')) {
                                 $popup
                                     .transition(settings.transition + ' out', settings.duration, function () {
-                                        module.reset();
+                                        moduleDom.reset();
                                         callback();
                                     })
                                 ;
@@ -325,7 +328,7 @@ define(function (require, exports, module) {
                                 $popup
                                     .stop()
                                     .fadeOut(settings.duration, settings.easing, function () {
-                                        module.reset();
+                                        moduleDom.reset();
                                         callback();
                                     })
                                 ;
@@ -375,7 +378,7 @@ define(function (require, exports, module) {
                                     left: (popup.position.left < boundary.left)
                                 };
                             }
-                            module.verbose('Checking if outside viewable area', popup.position);
+                            moduleDom.verbose('Checking if outside viewable area', popup.position);
                             // return only boundaries that have been surpassed
                             $.each(offstage, function (direction, isOffstage) {
                                 if (isOffstage) {
@@ -455,7 +458,7 @@ define(function (require, exports, module) {
                                     distanceAway += parseInt(window.getComputedStyle(element).getPropertyValue('margin-top'), 10);
                                 }
                             }
-                            module.debug('Calculating offset for position', position);
+                            moduleDom.debug('Calculating offset for position', position);
                             switch (position) {
                                 case 'top left':
                                     positioning = {
@@ -530,27 +533,27 @@ define(function (require, exports, module) {
                                 .addClass(className.loading)
                             ;
                             // check if is offstage
-                            offstagePosition = module.get.offstagePosition();
+                            offstagePosition = moduleDom.get.offstagePosition();
 
                             // recursively find new positioning
                             if (offstagePosition) {
-                                module.debug('Element is outside boundaries', offstagePosition);
+                                moduleDom.debug('Element is outside boundaries', offstagePosition);
                                 if (searchDepth < settings.maxSearchDepth) {
-                                    position = module.get.nextPosition(position);
+                                    position = moduleDom.get.nextPosition(position);
                                     searchDepth++;
-                                    module.debug('Trying new position', position);
-                                    return module.set.position(position);
+                                    moduleDom.debug('Trying new position', position);
+                                    return moduleDom.set.position(position);
                                 }
                                 else {
-                                    module.error(error.recursion);
+                                    moduleDom.error(error.recursion);
                                     searchDepth = 0;
-                                    module.reset();
+                                    moduleDom.reset();
                                     $popup.removeClass(className.loading);
                                     return false;
                                 }
                             }
                             else {
-                                module.debug('Position is on stage', position);
+                                moduleDom.debug('Position is on stage', position);
                                 searchDepth = 0;
                                 $popup.removeClass(className.loading);
                                 return true;
@@ -562,11 +565,11 @@ define(function (require, exports, module) {
                     bind: {
                         close: function () {
                             if (settings.on == 'click' && settings.closable) {
-                                module.verbose('Binding popup close event to document');
+                                moduleDom.verbose('Binding popup close event to document');
                                 $document
                                     .on('click' + eventNamespace, function (event) {
-                                        module.verbose('Pop-up clickaway intent detected');
-                                        $.proxy(module.hideGracefully, this)(event);
+                                        moduleDom.verbose('Pop-up clickaway intent detected');
+                                        $.proxy(moduleDom.hideGracefully, this)(event);
                                     })
                                 ;
                             }
@@ -576,7 +579,7 @@ define(function (require, exports, module) {
                     unbind: {
                         close: function () {
                             if (settings.on == 'click' && settings.closable) {
-                                module.verbose('Removing close event from document');
+                                moduleDom.verbose('Removing close event from document');
                                 $document
                                     .off('click' + eventNamespace)
                                 ;
@@ -592,7 +595,7 @@ define(function (require, exports, module) {
                             return $popup.is(':visible');
                         },
                         hidden: function () {
-                            return !module.is.visible();
+                            return !moduleDom.is.visible();
                         }
                     },
 
@@ -602,7 +605,7 @@ define(function (require, exports, module) {
                             .removeAttr('style')
                         ;
                         if (!settings.preserve) {
-                            module.remove();
+                            moduleDom.remove();
                         }
                     },
 
@@ -622,37 +625,37 @@ define(function (require, exports, module) {
                             $.extend(true, module, name);
                         }
                         else if (value !== undefined) {
-                            module[name] = value;
+                            moduleDom[name] = value;
                         }
                         else {
-                            return module[name];
+                            return moduleDom[name];
                         }
                     },
                     debug: function () {
                         if (settings.debug) {
                             if (settings.performance) {
-                                module.performance.log(arguments);
+                                moduleDom.performance.log(arguments);
                             }
                             else {
-                                module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
-                                module.debug.apply(console, arguments);
+                                moduleDom.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
+                                moduleDom.debug.apply(console, arguments);
                             }
                         }
                     },
                     verbose: function () {
                         if (settings.verbose && settings.debug) {
                             if (settings.performance) {
-                                module.performance.log(arguments);
+                                moduleDom.performance.log(arguments);
                             }
                             else {
-                                module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
-                                module.verbose.apply(console, arguments);
+                                moduleDom.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
+                                moduleDom.verbose.apply(console, arguments);
                             }
                         }
                     },
                     error: function () {
-                        module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
-                        module.error.apply(console, arguments);
+                        moduleDom.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
+                        moduleDom.error.apply(console, arguments);
                     },
                     performance: {
                         log: function (message) {
@@ -673,8 +676,8 @@ define(function (require, exports, module) {
                                     'Execution Time': executionTime
                                 });
                             }
-                            clearTimeout(module.performance.timer);
-                            module.performance.timer = setTimeout(module.performance.display, 100);
+                            clearTimeout(moduleDom.performance.timer);
+                            moduleDom.performance.timer = setTimeout(moduleDom.performance.display, 100);
                         },
                         display: function () {
                             var
@@ -682,12 +685,12 @@ define(function (require, exports, module) {
                                 totalTime = 0
                                 ;
                             time = false;
-                            clearTimeout(module.performance.timer);
+                            clearTimeout(moduleDom.performance.timer);
                             $.each(performance, function (index, data) {
                                 totalTime += data['Execution Time'];
                             });
                             title += ' ' + totalTime + 'ms';
-                            if (moduleSelector) {
+                            if (moduleDom) {
                                 title += ' \'' + moduleSelector + '\'';
                             }
                             if ((console.group !== undefined || console.table !== undefined) && performance.length > 0) {
@@ -762,15 +765,15 @@ define(function (require, exports, module) {
 
                 if (methodInvoked) {
                     if (instance === undefined) {
-                        module.initialize();
+                        moduleDom.initialize();
                     }
-                    module.invoke(query);
+                    moduleDom.invoke(query);
                 }
                 else {
                     if (instance !== undefined) {
-                        module.destroy();
+                        moduleDom.destroy();
                     }
-                    module.initialize();
+                    moduleDom.initialize();
                 }
             })
         ;

@@ -10,9 +10,9 @@
  */
 
 define(function (require, exports, module) {
-    require('slate/transition/1.0.0/transition');
-    require('jquery/easing/1.3.0/easing');
     var $ = require('$');
+    require('jquery/easing/1.3.0/easing');
+    require('slate/transition/1.0.0/transition');
     $.fn.dropdown = function (parameters) {
         var
             $allModules = $(this),

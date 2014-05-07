@@ -11,6 +11,7 @@
 
 define(function (require, exports, module) {
     var $ = require('$');
+    require('slate/dimmer/1.0.0/dimmer');
     $.fn.modal = function (parameters) {
         var
             $allModules = $(this),
