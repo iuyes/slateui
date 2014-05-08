@@ -279,7 +279,7 @@
                 <div class="ui small blue button add-column-btn">
                     批量添加栏目
                 </div>
-                <div class="ui small blue button">
+                <div class="ui small blue button copy-article-btn">
                     复制
                 </div>
             </div>
@@ -309,25 +309,7 @@
         批量添加栏目
     </div>
     <div class="content">
-        <div class="ui selection dropdown">
-            <input type="hidden" name="gender">
-            <div class="default text">请选择栏目</div>
-            <i class="dropdown icon"></i>
-            <div class="menu">
-                <div class="item" data-value="1">
-                    <div class="ui checkbox">
-                        <input type="checkbox">
-                        <label>这是一个栏目</label>
-                    </div>
-                </div>
-                <div class="item" data-value="0">
-                    <div class="ui checkbox">
-                        <input type="checkbox">
-                        <label>这是一个栏目</label>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <select class="add-column" multiple placeholder="选择栏目"></select>
     </div>
     <div class="actions">
         <div class="ui black button">
@@ -341,9 +323,48 @@
 </div>
 <!--添加栏目结束-->
 
-<!--选择类别开始-->
+<!--复制文章开始-->
+<div class="ui modal medium copy-article-dialog">
+    <i class="close icon"></i>
+    <div class="header">
+        复制文章
+    </div>
+    <div class="content">
+        <div class="ui selection dropdown select-app">
+            <input type="hidden" name="article-type">
 
-<!--选择类别结束-->
+            <div class="default text">选择应用</div>
+            <i class="dropdown icon"></i>
+
+            <div class="menu">
+                <div class="item" data-value="1">商业周刊</div>
+                <div class="item" data-value="0">视频文章</div>
+            </div>
+        </div>
+        <div class="ui selection dropdown select-issue">
+            <input type="hidden" name="article-type">
+
+            <div class="default text">选择期</div>
+            <i class="dropdown icon"></i>
+
+            <div class="menu">
+                <div class="item" data-value="1">普通文章</div>
+                <div class="item" data-value="0">视频文章</div>
+            </div>
+        </div>
+        <select class="add-column" multiple placeholder="选择栏目"></select>
+    </div>
+    <div class="actions">
+        <div class="ui black button">
+            取消
+        </div>
+        <div class="ui positive right labeled icon button">
+            确认
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+<!--复制文章结束-->
 <script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
 <script type="text/javascript" src="<%= global.staticDomain %>/js/cms/app-list.js"></script>
 </body>
