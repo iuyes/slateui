@@ -5,6 +5,7 @@ var userController = require('./controller/user');
 var slateController = require('./controller/slate');
 var appController = require('./controller/app');
 var toolsController = require('./controller/tools');
+var articleController = require('./controller/article')
 
 module.exports = function (app) {
     //开发环境
@@ -16,4 +17,7 @@ module.exports = function (app) {
     app.get('/apps', appController.list);
     //tools-文件遍历
     app.get('/tools/directory', toolsController.directory);
+
+    //文章管理
+    app.get('/article/add', articleController.add);
 }

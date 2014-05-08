@@ -199,7 +199,7 @@ samp {
   -webkit-text-size-adjust: none;
 }
 
-html{
+html {
   background: #FCFCFC url("images/bg.jpg") repeat;
 }
 
@@ -207,17 +207,16 @@ body {
   margin: 0;
   padding: 0;
   color: #555555;
-  font-family: "Helvetica","microsoft yahei";
+  font-family: "Helvetica", "microsoft yahei";
 }
 
-/* Let's get this party started */
 ::-webkit-scrollbar {
   width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
@@ -226,11 +225,12 @@ body {
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  background: rgba(255,0,0,0);
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  background: rgba(255, 0, 0, 0);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
+
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(255,0,0,0.5);
+  background: rgba(255, 0, 0, 0);
 }
 
 .header .wrapper, .slate-cms.wrapper {
@@ -299,8 +299,16 @@ body {
   }
 }
 
+.ui.popup .header {
+  padding: 0;
+}
+
+.tool-box {
+  margin-top: 20px;
+}
+
 /*尾部*/
-footer{
+footer {
   margin-top: 50px;
   padding: 10px 0 50px;
   text-align: center;

@@ -7,42 +7,13 @@
     <% for (var i = 0;i < global.slateUI.length; i++){ %>
     <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %> <%= global.slateUI[i] %>">
     <% } %>
-    <!--<link type="text/css" rel="stylesheet" href="http://semantic-ui.com/build/packaged/css/semantic.min.css">-->
 </head>
 <body>
-<header class="slate-cms header">
-    <div class="wrapper">
-        <h1 class="small-logo"></h1>
-        <ul class="user-links">
-            <li>
-                <a class="name">
-                    你好
-                    <span class="username">feeloc</span>
-                </a>
-            </li>
-
-            <li>
-                <a data-title="设置" class="account-settings">
-                    <i class="settings icon"></i>
-                </a>
-            </li>
-            <li>
-                <a data-title="退出" class="sign-out">
-                    <i class="sign out icon"></i>
-                </a>
-            </li>
-
-        </ul>
-    </div>
-</header>
+<% include header.ejs %>
 <div class="slate-cms wrapper">
-<div class="five fluid ui buttons tool-box">
-    <a class="ui button">文章管理</a>
-    <a class="ui button">杂志管理</a>
-    <a class="ui button">栏目管理</a>
-    <a class="ui button">工具箱</a>
-    <a class="ui button">后台管理</a>
-</div>
+
+<% include submenu.ejs %>
+
 <div class="list-box">
 <div class="list-left">
     <div class="ui blue vertical menu">
@@ -132,10 +103,11 @@
 <div class="list-right">
     <div class="add-btns-box">
         <div class="ui tiny blue buttons">
-            <div class="ui down button">
+            <a href="/article/add" class="ui down button">
                 <i class="edit icon"></i>
                 添加文章
-            </div>
+            </a>
+
             <div class="ui down button">
                 <i class="photo icon"></i>
                 添加组图
@@ -163,6 +135,7 @@
             </div>
             <div class="line line-two">
                 <select class="select-column" multiple placeholder="选择栏目"></select>
+
                 <div class="ui selection dropdown">
                     <input type="hidden" name="article-type">
 
@@ -261,7 +234,7 @@
                     <p>创建时间：</p>
 
                     <p>2013.05.3 22:00</p>
-
+                    <div class="ui divider"></div>
                     <p>更新人：feeloc</p>
 
                     <p>更建时间：</p>
@@ -299,12 +272,12 @@
 </div>
 </div>
 </div>
-<footer>
-    copyright @ slate 2014
-</footer>
+<% include footer.ejs %>
+
 <!--添加栏目开始-->
 <div class="ui modal small add-column-dialog">
     <i class="close icon"></i>
+
     <div class="header">
         批量添加栏目
     </div>
@@ -326,6 +299,7 @@
 <!--复制文章开始-->
 <div class="ui modal medium copy-article-dialog">
     <i class="close icon"></i>
+
     <div class="header">
         复制文章
     </div>
