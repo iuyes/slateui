@@ -12,3 +12,7 @@ exports.login = function (req, res, next) {
         res.json({method: 'login', status: 1});
     }
 };
+
+exports.logout = function (req, res, next) {
+    res.redirect('/login');
+};

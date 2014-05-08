@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title>添加PDF</title>
+    <% for (var i = 0;i < global.slateUI.length; i++){ %>
+    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %> <%= global.slateUI[i] %>">
+    <% } %>
+</head>
+<body>
+<% include header.ejs %>
+<div class="slate-cms wrapper">
+
+    <% include submenu.ejs %>
+    <div class="now-place-box">
+        <div class="ui breadcrumb">
+            <label>当前位置：</label>
+            <a class="section">文章管理</a>
+
+            <div class="divider"> /</div>
+            <div class="section">内容发布器管理</div>
+            <div class="divider"> /</div>
+            <div class="active section">添加内容</div>
+        </div>
+    </div>
+
+    <div class="ui form segment add-article-form">
+        <div class="header">
+            添加PDF
+        </div>
+
+        <div class="form-split-title">基本信息</div>
+        <div class="two fields">
+            <div class="field">
+                <label>标题</label>
+
+                <div class="ui labeled icon input">
+                    <input type="text">
+
+                    <div class="ui corner label">
+                        <i class="icon asterisk"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>短标题</label>
+
+                <div class="ui labeled icon input">
+                    <input type="text">
+
+                    <div class="ui corner label">
+                        <i class="icon asterisk"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="two fields">
+            <div class="field">
+                <label>作者</label>
+
+                <div class="ui labeled icon input">
+                    <input type="text">
+                </div>
+            </div>
+            <div class="field">
+                <label>英文名</label>
+
+                <div class="ui labeled icon input">
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label>头衔</label>
+
+            <div class="ui labeled icon input">
+                <input type="text">
+            </div>
+        </div>
+
+        <div class="form-split-title">文章内容</div>
+        <div class="field">
+            <div class="field">
+                <label>摘要</label>
+
+                <textarea></textarea>
+            </div>
+
+            <div class="field content">
+                <label>内容</label>
+
+                <textarea></textarea>
+            </div>
+
+            <div class="form-split-title">文章配图，音视频</div>
+            <div class="field content">
+                <label>模板配图</label>
+
+                <div class="ui teal small right labeled icon button">
+                    上传图片
+                    <i class="photo icon"></i>
+                </div>
+            </div>
+            <div class="field content">
+                <label>竖版配图</label>
+
+                <div class="ui teal small right labeled icon button">
+                    上传图片
+                    <i class="photo icon"></i>
+                </div>
+            </div>
+            <div class="form-split-title">上传PDF</div>
+            <div class="field content">
+                <div class="ui teal small right labeled icon button">
+                    上传PDF
+                    <i class="file icon"></i>
+                </div>
+            </div>
+
+            <div class="ui divider"></div>
+            <div class="field submit-box">
+                <div class="ui blue right labeled icon button">
+                    提交并关闭
+                    <i class="checkmark icon"></i>
+                </div>
+                <div class="ui hover right labeled icon button">
+                    暂时保存
+                    <i class="checkmark icon"></i>
+                </div>
+                <div class="ui red right labeled icon button fn-right">
+                    取消
+                    <i class="sign out icon"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <% include footer.ejs %>
+    <script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
+    <script type="text/javascript" src="<%= global.staticDomain %>/js/cms/edit-article.js"></script>
+</body>
+</html>

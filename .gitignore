@@ -47,5 +47,6 @@ src/slate/tab/src/tab.css
 src/slate/table/src/table.css
 src/slate/transition/src/transition.css
 src/slate/video/src/video.css
+src/css/*/*.css
 
 docs/_book/

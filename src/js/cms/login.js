@@ -42,7 +42,7 @@ seajs.use(['$', 'cms.base.js', 'validation', 'cms.login.css'], function ($, cmsB
                 username: username,
                 password: password
             }, function (d) {
-                if(d.status == 1){
+                if (d.status == 1) {
                     location.href = '/apps';
                 }
             });
@@ -50,6 +50,14 @@ seajs.use(['$', 'cms.base.js', 'validation', 'cms.login.css'], function ($, cmsB
     };
     $(function () {
         loginValidation();
+
+        $('input[type="text"],input[type="password"]').keyup(function (e) {
+            if (e.keyCode == 13) {
+                setTimeout(function () {
+                    submit();
+                }, 10)
+            }
+        });
 
         $('.submit').click(function () {
             submit();

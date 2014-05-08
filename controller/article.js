@@ -4,6 +4,6 @@
 
 exports.add = function (req, res, next) {
     if (req.method == 'GET') {
-        res.render('edit-article');
+        res.render('edit-' + req.url.match(/^\/([\w]+)\//)[1]);
     }
 };

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title></title>
+    <% for (var i = 0;i < global.slateUI.length; i++){ %>
+    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %> <%= global.slateUI[i] %>">
+    <% } %>
+    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %>/css/front/base.css">
+</head>
+<body>
+<% include header.ejs %>
+
+<div class="front-wrapper">
+    <div class="front-left">111</div>
+    222
+</div>
+
+<script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
+</body>
+</html>
