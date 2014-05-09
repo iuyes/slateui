@@ -15,7 +15,8 @@ define(function (require, exports, module) {
     }
 
     cmsBase.prototype.urls = {
-        getTemplateUrl: '/front/template/{name}'
+        getTemplateUrl: '/front/template/{name}',
+        getModuleUrl: '/front/module/{name}'
     };
 
     module.exports = new cmsBase();

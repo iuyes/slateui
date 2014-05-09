@@ -1,1 +1,39 @@
-111
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title>模块管理</title>
+    <% for (var i = 0;i < global.slateUI.length; i++){ %>
+    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %> <%= global.slateUI[i] %>">
+    <% } %>
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
+    <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %>/css/front/base.css">
+
+</head>
+<body>
+<% include header.ejs %>
+
+<div class="front-wrapper fn-clear">
+    <div class="front-left">
+        <div class="ui small vertical menu templates-box">
+            <% for(var i = 0;i < modules.length;i++){ %>
+            <a data-name="<%= modules[i] %>" class="teal item">
+                <%= modules[i] %>
+            </a>
+            <% } %>
+        </div>
+    </div>
+    <div class="editor">
+        <div class="ui stacked segment">
+            <div class="ui form loading show">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
+<script type="text/javascript" src="<%= global.staticDomain %>/js/front/modules.js"></script>
+<script type="text/javascript" src="http://www.daviddurman.com/flexi-json-editor/jquery.jsoneditor.js"></script>
+</body>
+</html>

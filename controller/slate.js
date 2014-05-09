@@ -11,7 +11,7 @@ exports.seajs = function (req, res, next) {
     } else if (url.match(/^\/(ui)/)) {
         req.url = url.replace(/\/ui/, '/slate');
         next();
-    } else if (url.match(/^\/(alice|jquery|seajs|zepto)/)) {
+    } else if (url.match(/^\/(alice|jquery|seajs|zepto|gallery)/)) {
         res.redirect(config.proStaticDomain + url);
     } else {
         next();

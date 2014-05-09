@@ -15,17 +15,26 @@ seajs.use(
     ], function ($, cmsBase) {
 
         $(function () {
+
             $('.templates-box a').click(function () {
                 $('.templates-box a').removeClass('active');
                 $(this).addClass('active');
 
                 var name = $.trim($(this).attr('data-name'));
 
-                $.get(cmsBase.urls.getTemplateUrl.replace('{name}', cmsBase.tools.Base64.encoder(name)), function (d) {
-                    $('.editor code').html(d.data);
+                $('.show').addClass('loading');
+                $.get(cmsBase.urls.getModuleUrl.replace('{name}', cmsBase.tools.Base64.encoder(name)), function (d) {
+                    setTimeout(function () {
+                        $('.show').html(JSON.stringify(d.data));
+                        $('.show').removeClass('loading')
+                            .jsonEditor(d, { change: function () {
+                                $('.show').html(JSON.stringify(d));
+                            } });
+                    }, 500);
                 });
             });
 
             $('.templates-box a:first').click();
-        })
+        });
+
     });

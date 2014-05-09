@@ -36,7 +36,7 @@
                 <label>标题</label>
 
                 <div class="ui labeled icon input">
-                    <input type="text">
+                    <input type="text" name="title" class="title">
 
                     <div class="ui corner label">
                         <i class="icon asterisk"></i>
@@ -47,7 +47,7 @@
                 <label>短标题</label>
 
                 <div class="ui labeled icon input">
-                    <input type="text">
+                    <input type="text" name="subtitle" class="subtitle">
 
                     <div class="ui corner label">
                         <i class="icon asterisk"></i>
@@ -106,21 +106,30 @@
 
         <div class="form-split-title">文章配图，音视频</div>
         <div class="field content">
-            <label>模板配图</label>
-            <div class="ui teal small right labeled icon button">
+            <label>横板配图</label>
+
+            <div class="ui teal small right labeled icon button upload-btn-h">
                 上传图片
                 <i class="photo icon"></i>
+            </div>
+            <div class="ui raised segment images-preview-h">
+                <p class="tips">无图片</p>
             </div>
         </div>
         <div class="field content">
             <label>竖版配图</label>
-            <div class="ui teal small right labeled icon button">
+
+            <div class="ui teal small right labeled icon button upload-btn-v">
                 上传图片
                 <i class="photo icon"></i>
+            </div>
+            <div class="ui raised segment images-preview-v">
+                <p class="tips">无图片</p>
             </div>
         </div>
         <div class="field content">
             <label>音视频</label>
+
             <div class="ui teal small right labeled icon button">
                 上传音频，视频
                 <i class="video icon"></i>
@@ -129,7 +138,7 @@
 
         <div class="ui divider"></div>
         <div class="field submit-box">
-            <div class="ui blue right labeled icon button">
+            <div class="ui blue submit right labeled icon button">
                 提交并关闭
                 <i class="checkmark icon"></i>
             </div>
@@ -143,9 +152,20 @@
             </div>
         </div>
     </div>
-
 </div>
 <% include footer.ejs %>
+
+<script type="text/template" class="upload-img-tmpl">
+    <div class="ui left floated medium image" data-path="{{{path}}}">
+        <div class="field">
+            <img src="{{{preview}}}">
+        </div>
+        <div class="ui label">
+            <span>{{path}}</span>
+            <i class="delete icon"></i>
+        </div>
+    </div>
+</script>
 <script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
 <script type="text/javascript" src="<%= global.staticDomain %>/js/cms/edit-article.js"></script>
 </body>

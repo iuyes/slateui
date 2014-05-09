@@ -6,6 +6,7 @@ var path = require('path');
 var fs = require('fs');
 var escape = require('escape-html');
 var hljs = require('highlight.js');
+var yuan = require('spm').sdk.yuan;
 
 /**
  * 前端模板文件管理
@@ -52,7 +53,30 @@ exports.getTemplate = function (req, res, next) {
  * @param next
  */
 exports.modules = function (req, res, next) {
-    var templateDir = path.join(__dirname, 'views');
+    var rootPath = path.dirname(process.mainModule.filename),
+        files = fs.readdirSync(path.join(rootPath, '/src/slate')),
+        modules = [];
 
-    res.render('front/modules');
+    files.forEach(function (file) {
+        var fileStat = fs.lstatSync(path.join(rootPath, '/src/slate', file));
+        if (fileStat.isDirectory()) {
+            modules.push(file)
+        }
+    });
+
+
+    res.render('front/modules', {modules: modules});
+};
+
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.getModule = function (req, res, next) {
+    var moduleName = req.params['name']
+    yuan().info({family: 'slate', name: new Buffer(moduleName, 'base64').toString('utf-8')}, function (err, ret, body) {
+        res.json({status: 1, data: body});
+    });
 };
