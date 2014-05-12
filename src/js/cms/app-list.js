@@ -4,11 +4,13 @@ seajs.config({
         'jquery': 'jquery/jquery/2.1.0/jquery',
         'checkbox': 'slate/checkbox/1.0.0/checkbox',
         'dropdown': 'slate/dropdown/1.0.0/dropdown',
+        'calendar': 'arale/calendar/1.0.0/calendar',
         'modal': 'slate/modal/1.0.0/modal',
         'pagination': 'slate/pagination/1.0.0/pagination',
         'cms.base.js': 'slate/cms-base/1.0.0/cms-base',
         'selecttag': 'slate/selecttag/1.0.0/selecttag',
-        'app.list.css': 'css/cms/app-list.css'
+        'app.list.css': 'css/cms/app-list.css',
+        'calendar.css': 'arale/calendar/1.0.0/calendar.css'
     }
 });
 
@@ -16,13 +18,15 @@ seajs.use(
     [
         '$',
         'cms.base.js',
+        'calendar',
         'modal',
         'pagination',
         'checkbox',
         'dropdown',
         'selecttag',
-        'app.list.css'
-    ], function ($, cmsBase) {
+        'app.list.css',
+        'calendar.css'
+    ], function ($, cmsBase, Calendar) {
         /**
          * 应用列表
          * @constructor
@@ -112,6 +116,24 @@ seajs.use(
 
                     initPagination()
                 };
+
+                /**
+                 * 时间选择
+                 */
+                AppList.prototype.timeHandle = function () {
+
+                    var c1 = new Calendar({trigger: '.start-time', range: [null, null]})
+                    var c2 = new Calendar({trigger: '.end-time', range: [null, null]})
+
+                    c1.on('selectDate', function (date) {
+                        c2.range([date, null]);
+                    });
+
+                    c2.on('selectDate', function (date) {
+                        c1.range([null, date]);
+                    });
+                };
+
                 /**
                  * 初使化
                  */
@@ -120,6 +142,8 @@ seajs.use(
 
                     _this.pageHandle();
                     _this.bindEvents();
+                    _this.timeHandle();
+
                     $('.app-name').click(function () {
                         _this.LeftMenuHandle($(this));
                     });

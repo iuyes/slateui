@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="ui form segment add-article-form">
+    <div class="ui form segment add-article-form" ms-controller="article">
         <div class="header">
             添加文章
         </div>
@@ -36,7 +36,7 @@
                 <label>标题</label>
 
                 <div class="ui labeled icon input">
-                    <input type="text" name="title" class="title">
+                    <input type="text" name="title" class="title" ms-duplex="article.title">
 
                     <div class="ui corner label">
                         <i class="icon asterisk"></i>
@@ -47,7 +47,7 @@
                 <label>短标题</label>
 
                 <div class="ui labeled icon input">
-                    <input type="text" name="subtitle" class="subtitle">
+                    <input type="text" name="subtitle" class="subtitle" ms-duplex="article.subtitle">
 
                     <div class="ui corner label">
                         <i class="icon asterisk"></i>
@@ -61,14 +61,14 @@
                 <label>作者</label>
 
                 <div class="ui labeled icon input">
-                    <input type="text">
+                    <input type="text" name="author" class="author" ms-duplex="article.author">
                 </div>
             </div>
             <div class="field">
                 <label>英文名</label>
 
                 <div class="ui labeled icon input">
-                    <input type="text">
+                    <input type="text" name="author-ename" class="author-ename" ms-duplex="article.author_ename">
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
             <label>头衔</label>
 
             <div class="ui labeled icon input">
-                <input type="text">
+                <input type="text" name="author-title" class="author-title" ms-duplex="article.author_title">
             </div>
         </div>
 
@@ -85,23 +85,23 @@
         <div class="field">
             <label>提纲</label>
 
-            <textarea></textarea>
+            <textarea ms-duplex="article.subcontent"></textarea>
         </div>
         <div class="field">
             <label>摘要</label>
 
-            <textarea></textarea>
+            <textarea ms-duplex="article.desc"></textarea>
         </div>
         <div class="field">
             <label>长摘要</label>
 
-            <textarea></textarea>
+            <textarea ms-duplex="article.long_desc"></textarea>
         </div>
 
         <div class="field content">
             <label>内容</label>
 
-            <textarea></textarea>
+            <textarea ms-duplex="article.content"></textarea>
         </div>
 
         <div class="form-split-title">文章配图，音视频</div>

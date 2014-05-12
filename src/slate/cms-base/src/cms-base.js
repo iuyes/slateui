@@ -1,16 +1,34 @@
 define(function (require, exports, module) {
-    require('slate/popup/1.0.0/popup');
-    var $ = require('$');
+    require('slate/popup/1.0.0/popup'); //菜单上的弹出动画
+
+    var config = require('/js/cms/config.js'),
+        $ = require('$'),
+        aop = require('slate/aop/1.0.0/aop');
 
     var cmsBase = function () {
         $('.sign-out,.account-settings').popup();
+
+        aop.before( {target: window, method: 'alert'},
+            function(alertarguments/* 这里是 alert 方法的参数 */) {
+                document.write("before alert，argument： " + alertarguments[0] + "<br />");
+            }
+        );
     };
 
-    cmsBase.prototype.urls = {
-        login: '/login',
-        uploadImg: 'http://develop.jinxin.bbwc.cn/yaf_attachments/public/index.php/cms/upload/debug/1/datatype/2',
-        addArticle: 'http://develop.bbwc.cn/magazine/article/',
-        editArticle: 'http://develop.bbwc.cn/magazine/article/{{articleid}}'
+    /**
+     * 获取url
+     * @param name
+     * @param args
+     * @returns {*}
+     */
+    cmsBase.prototype.getUrl = function (name, args) {
+        var url = config.urls[name];
+        if (!!args) {
+            for (var arg in args) {
+                url = url.replace('{{' + arg + '}}', args[arg]);
+            }
+        }
+        return url;
     };
 
     module.exports = new cmsBase();

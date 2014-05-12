@@ -19,8 +19,7 @@
   "licenses": "MIT",
   "spm": {
     "output": [
-      "cms-base.js",
-      "cms-base.css"
+      "cms-base.js"
     ],
     "alias": {},
     "devAlias": {},

@@ -26,6 +26,8 @@ module.exports = function (app) {
     //文章管理
     app.get('/article/add', articleController.add);
     app.get('/pdf/add', articleController.add);
+    app.get('/pictures/add', articleController.add);
+    app.get('/article/get', articleController.getArticle);
 
     //前端管理
     app.get('/front/templates', frontController.templates); //模板文件管理
