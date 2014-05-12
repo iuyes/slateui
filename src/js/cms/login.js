@@ -38,12 +38,12 @@ seajs.use(['$', 'cms.base.js', 'validation', 'cms.login.css'], function ($, cmsB
             var username = $('.username').val(),
                 password = $('.password').val();
 
-            $.post(cmsBase.urls.login, {
+            $.post(cmsBase.getUrl('login', null), {
                 username: username,
                 password: password
             }, function (d) {
                 if (d.status == 1) {
-                    location.href = '/apps';
+                    location.href = cmsBase.getUrl('appList', null);
                 }
             });
         }

@@ -1,18 +1,13 @@
 define(function (require, exports, module) {
     require('slate/popup/1.0.0/popup'); //菜单上的弹出动画
+    require('slate/modal/1.0.0/modal'); //弹出框
 
     var config = require('/js/cms/config.js'),
-        $ = require('$'),
-        aop = require('slate/aop/1.0.0/aop');
+        aop = require('slate/aop/1.0.0/aop'),
+        $ = require('$');
 
     var cmsBase = function () {
         $('.sign-out,.account-settings').popup();
-
-        aop.before( {target: window, method: 'alert'},
-            function(alertarguments/* 这里是 alert 方法的参数 */) {
-                document.write("before alert，argument： " + alertarguments[0] + "<br />");
-            }
-        );
     };
 
     /**
@@ -29,6 +24,35 @@ define(function (require, exports, module) {
             }
         }
         return url;
+    };
+
+    /**
+     * 调用过cmsBase且方法以_safe结尾的都会调用切面方法，判断登录
+     * @param obj
+     * @param objName
+     * @param funName
+     * @private
+     */
+    cmsBase.prototype._shouldLogin = function (obj, objName, funName) {
+        aop.around({target: obj, method: /(\w+)(_safe)$/},
+            function (invocation) {
+                if (false) {
+                    return invocation.proceed();
+                } else {
+                    $.slateAlert({content: '请登录后操作'});
+                }
+            }
+        );
+    };
+
+    /**
+     * aop方法包装
+     * @param obj
+     * @param objName
+     * @param funName
+     */
+    cmsBase.prototype.aop = function (obj, objName, funName) {
+        this._shouldLogin(obj, objName, funName);
     };
 
     module.exports = new cmsBase();

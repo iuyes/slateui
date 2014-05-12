@@ -24,7 +24,7 @@ seajs.use(
         'edit.article.css'
     ], function ($, Mustache, cmsBase, Uploader, avalon) {
         var Article = function () {
-
+            cmsBase.aop(this, 'Article');
         };
 
         Article.prototype.uploadImgTmpl = $('.upload-img-tmpl').html(); //上传图片预览模板
@@ -34,7 +34,7 @@ seajs.use(
          */
         Article.prototype.uploadImg = function (triggerName) {
             var _this = this;
-            new Uploader({
+            var upload = new Uploader({
                 trigger: triggerName,
                 name: 'image',
                 action: cmsBase.getUrl('uploadImg', null),
@@ -62,8 +62,8 @@ seajs.use(
                         });
                     }
                 },
-                progress: function (event, position, total, percent, files) {
-                    console.log(files);
+                change: function (files) {
+                    this.submit();
                 }
             });
         };
@@ -94,10 +94,16 @@ seajs.use(
             });
         };
 
+        Article.prototype._submit_safe = function () {
+
+        };
+
         /**
          * 事件绑定
          */
         Article.prototype.bindEvent = function () {
+            var _this = this;
+
             $('input,textarea').inputCount({
                 isByte: false
             }, function (n) {
@@ -117,9 +123,13 @@ seajs.use(
                 setTimeout(function () {
                     $icon.removeClass('loading').addClass('asterisk');
                 }, 1000);
-                $.get(cmsBase.urls.titleCheck, function () {
+                $.get(cmsBase.getUrl('titleCheck', null), function () {
 
                 });
+            });
+
+            $('.submit-article').click(function () {
+                _this._submit_safe();
             });
         };
 
@@ -127,7 +137,8 @@ seajs.use(
          * 采用MVVM做article表单处理
          */
         Article.prototype.articleMvvm = function () {
-            var articleModel = avalon.define('article', function (vm) {
+            var _this = this;
+            _this.articleModel = avalon.define('article', function (vm) {
                 vm.article = {};
             });
             $.get(cmsBase.getUrl('getArticle', {articleid: 41670}), function (articles) {
@@ -135,7 +146,7 @@ seajs.use(
                 for (var articleid in articles) {
                     article = JSON.parse(articles[articleid].data);
                 }
-                articleModel.article = article;
+                _this.articleModel.article = article;
             }, 'json');
         };
 
@@ -149,7 +160,7 @@ seajs.use(
         };
 
         $(function () {
-            var article = new Article();
+            var article = window.article = new Article();
             article.init();
         })
     });

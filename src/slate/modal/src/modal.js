@@ -12,6 +12,45 @@
 define(function (require, exports, module) {
     var $ = require('$');
     require('slate/dimmer/1.0.0/dimmer');
+
+    var alertTmpl = '<div class="ui modal">' +
+        '<i class="close icon"></i>' +
+        '<div class="header">' +
+        '</div>' +
+        '<div class="content">' +
+        '</div>' +
+        '<div class="actions">' +
+        '<div class="ui negative button">取消</div>' +
+        '<div class="ui positive button">确认</div>' +
+        '</div>' +
+        '</div>';
+    $.extend($,
+        {'slateAlert': function (args) {
+            var options = {
+                    size: 'small',
+                    title: '提示框',
+                    content: '提示内容',
+                    cancelValue: '取消',
+                    okValue: '确认',
+                    cancel: function () {
+                    },
+                    ok: function () {
+                    }
+                },
+                opts = $.extend(options, args),
+                $alert = $(alertTmpl);
+
+            $alert.addClass(opts.size).find('.header').html(opts.title);
+            $alert.find('.content').html(opts.content);
+
+            return $alert
+                .modal('setting', {
+                    closable: false,
+                    onDeny: opts.cancel,
+                    onApprove: opts.ok
+                })
+                .modal('show');
+        }});
     $.fn.modal = function (parameters) {
         var
             $allModules = $(this),
