@@ -141,10 +141,10 @@ seajs.use(
                 id = 26244;
 
             $.get(cmsBase.getUrl('getArticle', {articleId: id}), function (articles) {
-                console.log(articles[id].data);
                 _this.articleModel = avalon.define('article', function (vm) {
                     vm.article = articles[id].data;
                 });
+                avalon.scan();
             }, 'json');
 
 
