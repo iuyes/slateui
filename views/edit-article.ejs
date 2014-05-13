@@ -11,22 +11,6 @@
 <body>
 <% include header.ejs %>
 <div class="slate-cms wrapper">
-    <div ms-controller="update">
-        <div>{{article1.aaa}}</div>
-        <div>{{article1.bbb}}</div>
-        <div>{{article1.ccc}}</div>
-        <div>{{article1.time | date("yyyy - MM - dd mm:ss")}}</div>
-        <ul ms-repeat="article1.simpleArray">
-            <li>{{el}}</li>
-        </ul>
-        <div>  <select ms-repeat="article1.objectArray">
-                <option ms-value="el.value">{{el.name}}</option>
-            </select>
-        </div>
-        <ol ms-repeat="article1.object">
-            <li>{{$key}}                {{$val}}</li>
-        </ol>
-    </div>
     <% include submenu.ejs %>
     <div class="now-place-box">
         <div class="ui breadcrumb">
@@ -40,7 +24,7 @@
         </div>
     </div>
 
-    <div class="ui form segment add-article-form" ms-controller="article">
+    <div class="ui form segment add-article-form loading" ms-class="loading:article.loading" ms-controller="article">
         <div class="header">
             添加文章
         </div>
@@ -129,13 +113,13 @@
             </div>
             <div class="ui raised segment images-preview-h">
                 <p class="tips" ms-if="!article.ipictureurls || article.ipictureurls.length == 0">无图片</p>
-                <div class="ui left floated medium image" data-path="2014/0513/5371b9f7dcb23.jpg">
+                <div class="ui left floated medium image" data-path="2014/0513/5371b9f7dcb23.jpg" ms-repeat="article.pictureurls">
                     <div class="field">
-                        <img src="http://develop.jinxin.bbwc.cn/2014/0513/5371b9f7dcb23.jpg">
+                        <img ms-src="el.preview">
                     </div>
                     <div class="ui label">
-                        <span>2014/0513/5371b9f7dcb23.jpg</span>
-                        <i class="delete icon"></i>
+                        <span>{{el.alt}}</span>
+                        <i class="delete icon" ms-click="article.removePic($index)"></i>
                     </div>
                 </div>
             </div>
@@ -151,11 +135,11 @@
                 <p class="tips" ms-if="!article.vpictureurls || article.vpictureurls.length == 0">无图片</p>
                 <div class="ui left floated medium image" data-path="2014/0513/5371b9f7dcb23.jpg" ms-repeat="article.vpictureurls">
                     <div class="field">
-                        <img src="http://develop.jinxin.bbwc.cn/2014/0513/5371b9f7dcb23.jpg">
+                        <img ms-src="el.preview">
                     </div>
                     <div class="ui label">
                         <span>{{el.alt}}</span>
-                        <i class="delete icon"></i>
+                        <i class="delete icon" ms-click="article.removePicV($index)"></i>
                     </div>
                 </div>
             </div>
@@ -189,12 +173,12 @@
 <% include footer.ejs %>
 
 <script type="text/template" class="upload-img-tmpl">
-    <div class="ui left floated medium image" data-path="{{{path}}}">
+    <div class="ui left floated medium image" data-path="{{{url}}}">
         <div class="field">
             <img src="{{{preview}}}">
         </div>
         <div class="ui label">
-            <span>{{path}}</span>
+            <span>{{url}}</span>
             <i class="delete icon"></i>
         </div>
     </div>

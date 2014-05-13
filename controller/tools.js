@@ -17,6 +17,27 @@ exports.upload = function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Allow-Origin', '*');
 
-//    res.json({aid: 49, status: "success", filepath: "/home/jinxin/uploadfile/cms/2014/0509/536c74a69afa7.jpeg", path: "2014/0509/536c74a69afa7.jpeg", preview: "http://develop.jinxin.bbwc.cn/uploadfile/cms/2014/0509/536c74a69afa7.jpeg"});
-    res.json({aid: 50, status: "success", filepath: "/home/jinxin/uploadfile/cms/2014/0509/536c7557a577d.jpg", path: "2014/0509/536c7557a577d.jpg", preview: "http://develop.jinxin.bbwc.cn/uploadfile/cms/2014/0509/536c7557a577d.jpg"});
+    var images = [],
+        files = [];
+    if (req.files.image instanceof Array) {
+        Array.prototype.push.apply(files, req.files.image);
+    } else {
+        files.push(req.files.image);
+    }
+
+    console.log(files);
+
+    for (var i = 0; i < files.length; i++) {
+        images.push({
+            "url": files[i].path.replace('src', ''),
+            "preview": "http://127.0.0.1:3000/" + files[i].path.replace('src', ''),
+            "alt": files[i].originalFilename
+        });
+    }
+
+    res.json({
+        status: 'success',
+        images: images
+    });
+
 };

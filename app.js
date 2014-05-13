@@ -15,6 +15,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.favicon(path.join(__dirname, 'src/images/favicon.ico')));
+app.use(express.bodyParser({uploadDir: './src/upload'}));
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
@@ -32,7 +33,7 @@ if ('development' == app.get('env')) {
     global.staticDomain = config.devStaticDomain;
     global.slateUI = config.devSlateUI;
     app.use(express.errorHandler());
-}else{
+} else {
     global.staticDomain = config.proStaticDomain;
     global.slateUI = config.proSlateUI;
 }
