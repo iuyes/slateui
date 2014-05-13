@@ -24,7 +24,7 @@ seajs.use(
         'edit.article.css'
     ], function ($, Mustache, cmsBase, Uploader, avalon) {
         var Article = function () {
-            cmsBase.aop(this, 'Article');
+            cmsBase.aop(this, 'Article', null);
         };
 
         Article.prototype.uploadImgTmpl = $('.upload-img-tmpl').html(); //上传图片预览模板
@@ -34,7 +34,7 @@ seajs.use(
          */
         Article.prototype.uploadImg = function (triggerName) {
             var _this = this;
-            var upload = new Uploader({
+            new Uploader({
                 trigger: triggerName,
                 name: 'image',
                 action: cmsBase.getUrl('uploadImg', null),
@@ -62,8 +62,8 @@ seajs.use(
                         });
                     }
                 },
-                change: function (files) {
-                    this.submit();
+                progress: function (event, position, total, percent, files) {
+                    console.log(files);
                 }
             });
         };
@@ -137,17 +137,78 @@ seajs.use(
          * 采用MVVM做article表单处理
          */
         Article.prototype.articleMvvm = function () {
-            var _this = this;
-            _this.articleModel = avalon.define('article', function (vm) {
-                vm.article = {};
-            });
-            $.get(cmsBase.getUrl('getArticle', {articleid: 41670}), function (articles) {
-                var article;
-                for (var articleid in articles) {
-                    article = JSON.parse(articles[articleid].data);
-                }
-                _this.articleModel.article = article;
+            var _this = this,
+                id = 26244;
+
+            $.get(cmsBase.getUrl('getArticle', {articleId: id}), function (articles) {
+                console.log(articles[id].data);
+                _this.articleModel = avalon.define('article', function (vm) {
+                    vm.article = articles[id].data;
+                });
             }, 'json');
+
+
+            _this.model = avalon.define("update", function (vm) {
+                vm.article1 = {};
+                vm.article1.aaa = "str"
+                vm.article1.bbb = false
+                vm.article1.ccc = 1223
+                vm.article1.time = new Date
+                vm.article1.simpleArray = [1, 2, 3, 4]
+                vm.article1.objectArray = [
+                    {name: "a"},
+                    {name: "b"},
+                    {name: "c"},
+                    {name: "d"}
+                ]
+                vm.article1.object = {
+                    o1: "k1",
+                    o2: "k2",
+                    o3: "k3"
+                }
+                vm.article1.simpleArray = [1, 2, 3, 4]
+                vm.article1.objectArray = [
+                    {name: "a", value: "aa"},
+                    {name: "b", value: "bb"},
+                    {name: "c", value: "cc"},
+                    {name: "d", value: "dd"}
+                ]
+                vm.article1.object = {
+                    o1: "k1",
+                    o2: "k2",
+                    o3: "k3"
+                }
+            })
+            setTimeout(function () {
+                //如果是更新简单数据类型（string, boolean, number）或Date类型
+                _this.model.article1.aaa = "这是字符串"
+                _this.model.article1.bbb = true
+                _this.model.article1.ccc = 999999999999
+                var date = new Date
+                _this.model.article1.time = new Date(date.setFullYear(2005))
+            }, 2000)
+
+            setTimeout(function () {
+                //如果是数组，注意保证它们的元素的类型是一致的
+                //只能全是字符串，或是全是布尔，不能有一些是这种类型，另一些是其他类型
+                //这时我们可以使用set方法来更新（它有两个参数，第一个是index，第2个是新值）
+                _this.model.article1.simpleArray.set(0, 1000)
+                _this.model.article1.simpleArray.set(2, 3000)
+                _this.model.article1.objectArray.set(0, {name: "xxxxxxxxxxxxxxxx", value: "xxx"})
+            }, 2500)
+            setTimeout(function () {
+                _this.model.article1.objectArray[1].name = "5555"
+            }, 3000)
+            setTimeout(function () {
+                //如果要更新对象，直接赋给它一个对象，注意不能将一个VM赋给它，可以到VM的$model赋给它（要不会在IE6-8中报错）
+                _this.model.article1.object = {
+                    aaaa: "aaaa",
+                    bbbb: "bbbb",
+                    cccc: "cccc",
+                    dddd: "dddd"
+                }
+            }, 3000)
+
         };
 
         Article.prototype.init = function () {

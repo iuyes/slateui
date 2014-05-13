@@ -319,6 +319,7 @@ define("avalon", function (require, exports, module) {
             var scope = {
                 $watch: noop
             }
+
             factory(scope) //得到所有定义
             var model = modelFactory(scope) //偷天换日，将scope换为model
             stopRepeatAssign = true
