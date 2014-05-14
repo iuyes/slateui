@@ -19,7 +19,8 @@
     "less-middleware": "~0.1.15",
     "escape-html": "*",
     "highlight.js": "^8.0.0",
-    "spm": "^2.2.5"
+    "spm": "^2.2.5",
+    "mongoose": "^3.8.9"
   },
   "devDependencies": {
     "grunt": "x.x.x",

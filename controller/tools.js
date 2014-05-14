@@ -25,8 +25,6 @@ exports.upload = function (req, res, next) {
         files.push(req.files.image);
     }
 
-    console.log(files);
-
     for (var i = 0; i < files.length; i++) {
         images.push({
             "url": files[i].path.replace('src', ''),

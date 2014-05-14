@@ -112,7 +112,7 @@
                 <i class="photo icon"></i>
             </div>
             <div class="ui raised segment images-preview-h">
-                <p class="tips" ms-if="!article.ipictureurls || article.ipictureurls.length == 0">无图片</p>
+                <p class="tips" ms-if="!article.pictureurls || article.pictureurls.length == 0">无图片</p>
                 <div class="ui left floated medium image" data-path="2014/0513/5371b9f7dcb23.jpg" ms-repeat="article.pictureurls">
                     <div class="field">
                         <img ms-src="el.preview">
@@ -172,17 +172,6 @@
 </div>
 <% include footer.ejs %>
 
-<script type="text/template" class="upload-img-tmpl">
-    <div class="ui left floated medium image" data-path="{{{url}}}">
-        <div class="field">
-            <img src="{{{preview}}}">
-        </div>
-        <div class="ui label">
-            <span>{{url}}</span>
-            <i class="delete icon"></i>
-        </div>
-    </div>
-</script>
 <script type="text/javascript" src="<%= global.staticDomain %>/seajs/seajs/2.2.1/sea.js"></script>
 <script type="text/javascript" src="<%= global.staticDomain %>/js/cms/edit-article.js"></script>
 </body>

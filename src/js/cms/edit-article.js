@@ -29,8 +29,6 @@ seajs.use(
             cmsBase.aop(this, 'Article', null);
         };
 
-        Article.prototype.uploadImgTmpl = $('.upload-img-tmpl').html(); //上传图片预览模板
-
         /**
          * 上传图片
          */
@@ -93,8 +91,14 @@ seajs.use(
         };
 
         Article.prototype._submit_safe = function () {
-            this.articleModel.article.loading = true;
-            console.log(this.articleModel.article.$model);
+            var _this = this;
+            _this.articleModel.article.loading = true;
+
+            $.post(cmsBase.getUrl('editArticle', {
+                articleId: 26244
+            }), {data: JSON.stringify(_this.articleModel.article.$model)}, function (d) {
+                console.log(d);
+            }, 'json');
         };
 
         /**
@@ -144,10 +148,10 @@ seajs.use(
                     vm.article = articles[id].data;
                     vm.article.removePic = function (index) {
                         _this.articleModel.article.pictureurls.splice(index, 1);
-                    }
+                    };
                     vm.article.removePicV = function (index) {
                         _this.articleModel.article.vpictureurls.splice(index, 1);
-                    }
+                    };
                     vm.article.loading = false;
                 });
                 avalon.scan();
