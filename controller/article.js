@@ -2,6 +2,8 @@
  * Created by hujianmeng on 14-5-4.
  */
 
+var Article = require('../proxy').Article;
+
 exports.add = function (req, res, next) {
     if (req.method == 'GET') {
         res.render('edit-' + req.url.match(/^\/([\w]+)\//)[1]);

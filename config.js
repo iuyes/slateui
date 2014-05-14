@@ -49,5 +49,9 @@ module.exports = {
         "/ui/transition/src/transition.css",
         "/ui/video/src/video.css",
         "/ui/cms-base/src/cms-base.css"
-    ]
+    ],
+    getMongoUri: function () {
+        return "mongodb://root:hjmfeeloc1989mongo@ds049198.mongolab.com:49198/slate";
+//        return "mongodb://root:hjmfeeloc1989mongo@alex.mongohq.com:10087/feeloc03";
+    }
 }
