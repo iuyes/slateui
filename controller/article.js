@@ -41,7 +41,7 @@ exports.addArticle = function (req, res, next) {
  */
 exports.getArticle = function (req, res, next) {
 
-    Article.get({_id: '537345238c3b8ed719000002'}, function (err, articles) {
+    Article.get({_id: '537384992ea486c28f000001'}, function (err, articles) {
         if (err) {
             return next;
         } else {
@@ -72,6 +72,8 @@ exports.editArticle = function (req, res, next) {
     var id = req.param('id'),
         article = req.body.data;
 
+    console.log(id);
+    console.log(article);
     Article.updateById(id, JSON.parse(article), null, function (a, b) {
         console.log(a);
         console.log(b);

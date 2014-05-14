@@ -34,5 +34,5 @@ exports.get = function (condition, callback) {
  *
  */
 exports.updateById = function (id, update, options, callback) {
-    Article..findByIdAndUpdate(id, update, options, callback);
+    Article.findByIdAndUpdate(id, update, options, callback);
 };

@@ -25,12 +25,15 @@ module.exports = function (app) {
 
     //文章管理
     app.get('/article/add', articleController.add);
+    app.get('/article/edit/:id', articleController.add);
     app.get('/pdf/add', articleController.add);
+    app.get('/pdf/edit/:id', articleController.add);
     app.get('/pictures/add', articleController.add);
+    app.get('/pictures/edit/:id', articleController.add);
     app.get('/article/get/:id', articleController.getArticle);
 
     app.post('/content/add', articleController.addArticle);
-    app.get('/content/edit/:id', articleController.editArticle);
+    app.post('/content/edit/:id', articleController.editArticle);
 
     //前端管理
     app.get('/front/templates', frontController.templates); //模板文件管理

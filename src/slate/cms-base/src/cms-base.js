@@ -9,6 +9,8 @@ define(function (require, exports, module) {
 
     var cmsBase = function () {
         $('.sign-out,.account-settings').popup();
+
+        this.urlParse();
     };
 
     /**
@@ -55,6 +57,16 @@ define(function (require, exports, module) {
      */
     cmsBase.prototype.aop = function (obj, objName, funName) {
         this._shouldLogin(obj, objName, funName);
+    };
+
+    /**
+     * URL解析
+     */
+    cmsBase.prototype.urlParse = function () {
+        var articleId = location.href.substring(location.href.lastIndexOf('/') + 1);
+        if (articleId.length > 20) {
+            this.articleId = articleId;
+        }
     };
 
     module.exports = new cmsBase();

@@ -94,11 +94,24 @@ seajs.use(
             var _this = this;
             _this.articleModel.article.loading = true;
 
-            $.post(cmsBase.getUrl('addArticle', {
-                articleId: 26244
-            }), {data: JSON.stringify(_this.articleModel.article.$model)}, function (d) {
-                console.log(d);
-            }, 'json');
+            if (!cmsBase.articleId) {
+                $.post(cmsBase.getUrl('addArticle', null), {
+                    data: JSON.stringify(_this.articleModel.article.$model)
+                }, function (d) {
+                    if (d && d.status == 'success') {
+                        $.slateAlert({content: '修改成功'})
+                    }
+                }, 'json');
+            } else {
+                $.post(cmsBase.getUrl('editArticle', {
+                    articleId: cmsBase.articleId
+                }), {data: JSON.stringify(_this.articleModel.article.$model)}, function (d) {
+                    if (d && d.status == 'success') {
+                        $.slateAlert({content: '修改成功'})
+                    }
+                }, 'json');
+            }
+
         };
 
         /**
@@ -143,9 +156,30 @@ seajs.use(
             var _this = this,
                 id = 26244;
 
-            $.get(cmsBase.getUrl('getArticle', {articleId: id}), function (articles) {
+            if (!!cmsBase.articleId) {
+                $.get(cmsBase.getUrl('getArticle', {articleId: id}), function (articles) {
+                    _this.articleModel = avalon.define('article', function (vm) {
+                        if (!articles[id].data) {
+                            vm.article = {action: '添加文章'};
+                        } else {
+                            vm.article = articles[id].data;
+                            vm.article.action = '修改文章';
+                        }
+
+                        vm.article.removePic = function (index) {
+                            _this.articleModel.article.pictureurls.splice(index, 1);
+                        };
+                        vm.article.removePicV = function (index) {
+                            _this.articleModel.article.vpictureurls.splice(index, 1);
+                        };
+                        vm.article.loading = false;
+                    });
+                    avalon.scan();
+                }, 'json');
+            } else {
                 _this.articleModel = avalon.define('article', function (vm) {
-                    vm.article = articles[id].data;
+                    vm.article = {action: '添加文章'};
+
                     vm.article.removePic = function (index) {
                         _this.articleModel.article.pictureurls.splice(index, 1);
                     };
@@ -155,7 +189,7 @@ seajs.use(
                     vm.article.loading = false;
                 });
                 avalon.scan();
-            }, 'json');
+            }
         };
 
         Article.prototype.init = function () {
