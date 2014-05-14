@@ -94,7 +94,7 @@ seajs.use(
             var _this = this;
             _this.articleModel.article.loading = true;
 
-            $.post(cmsBase.getUrl('editArticle', {
+            $.post(cmsBase.getUrl('addArticle', {
                 articleId: 26244
             }), {data: JSON.stringify(_this.articleModel.article.$model)}, function (d) {
                 console.log(d);

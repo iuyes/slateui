@@ -1,7 +1,7 @@
 define(function (require, exports, module) {
     var config = {};
 
-    config.env = 'dev1';
+    config.env = 'dev';
 
     config.urls = {
         login: '/login',                                                                                            //登录
@@ -19,8 +19,8 @@ define(function (require, exports, module) {
         titleCheck: '',
         uploadImg: '/tools/upload',
         getArticle: '/article/get/{{articleId}}',
-        addArticle: '/article/get/{{articleId}}',
-        editArticle: 'http://develop.bbwc.cn/magazine/article/{{articleId}}'
+        addArticle: '/content/add',
+        editArticle: '/content/edit/{{articleId}}'
     };
 
     module.exports = config;
