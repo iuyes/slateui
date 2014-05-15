@@ -72,8 +72,6 @@ exports.editArticle = function (req, res, next) {
     var id = req.param('id'),
         article = req.body.data;
 
-    console.log(id);
-    console.log(article);
     Article.updateById(id, JSON.parse(article), null, function (a, b) {
         console.log(a);
         console.log(b);

@@ -8,7 +8,6 @@ var Article = models.Article;
  */
 exports.add = function (args, callback) {
     var article = new Article();
-
     for (var arg in args) {
         article[arg] = args[arg];
     }
@@ -34,5 +33,5 @@ exports.get = function (condition, callback) {
  *
  */
 exports.updateById = function (id, update, options, callback) {
-    Article.findByIdAndUpdate(id, update, options, callback);
+    Article.findOneAndUpdate({_id: id}, update, options, callback);
 };

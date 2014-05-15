@@ -28,32 +28,37 @@
   .field.submit-box {
     margin: 2em 0;
   }
-  .field .count-box{
+  .field .count-box {
     margin-left: 20px;
     color: #999;
+  }
+  .field .check-res {
+    display: none;
+    position: absolute;
+    z-index: 10;
   }
   .images-preview-h .ui.medium.image {
     width: 160px;
     height: 140px;
     overflow: hidden;
 
-    .field{
+    .field {
       height: 100px;
     }
 
-    .ui.label{
+    .ui.label {
       width: 102%;
       margin-left: -0.1em;
       overflow: hidden;
 
-      span{
+      span {
         float: left;
         width: 86%;
         overflow: hidden;
         white-space: nowrap;
       }
 
-      .delete.icon{
+      .delete.icon {
         float: right;
       }
     }
@@ -64,25 +69,52 @@
     height: 140px;
     overflow: hidden;
 
-    .field{
+    .field {
       height: 100px;
     }
 
-    .ui.label{
+    .ui.label {
       width: 102%;
       margin-left: -0.1em;
       overflow: hidden;
 
-      span{
+      span {
         float: left;
         width: 78%;
         overflow: hidden;
         white-space: nowrap;
       }
 
-      .delete.icon{
+      .delete.icon {
         float: right;
       }
     }
   }
+
+  .ui.medium.image.img-select {
+    padding: 10px;
+    width: 100%;
+
+    .preview-left {
+      position: absolute;
+      width: 160px;
+      left: 10px;
+      top: 10px;
+    }
+
+    .preview-right {
+      padding-left: 170px;
+
+      .field {
+        height: auto;
+      }
+
+      textarea{
+        min-height: 5em;
+        height: 5em;
+      }
+    }
+
+  }
+
 }

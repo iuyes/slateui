@@ -25,7 +25,7 @@
     </div>
 
     <div class="ui form segment add-article-form loading" ms-class="loading:article.loading" ms-controller="article">
-        <div class="header">
+        <div class="header" ms-if="!article.title">
             {{article.action}}
         </div>
 
@@ -40,6 +40,7 @@
                     <div class="ui corner label">
                         <i class="icon asterisk"></i>
                     </div>
+                    <div class="ui red pointing above ui label check-res">该标题已存在</div>
                 </div>
             </div>
             <div class="field">
@@ -113,7 +114,9 @@
             </div>
             <div class="ui raised segment images-preview-h">
                 <p class="tips" ms-if="!article.pictureurls || article.pictureurls.length == 0">无图片</p>
-                <div class="ui left floated medium image" data-path="2014/0513/5371b9f7dcb23.jpg" ms-repeat="article.pictureurls">
+
+                <div class="ui left floated medium image" data-path="2014/0513/5371b9f7dcb23.jpg"
+                     ms-repeat="article.pictureurls">
                     <div class="field">
                         <img ms-src="el.preview">
                     </div>
@@ -133,7 +136,9 @@
             </div>
             <div class="ui raised segment images-preview-v">
                 <p class="tips" ms-if="!article.vpictureurls || article.vpictureurls.length == 0">无图片</p>
-                <div class="ui left floated medium image" data-path="2014/0513/5371b9f7dcb23.jpg" ms-repeat="article.vpictureurls">
+
+                <div class="ui left floated medium image" data-path="2014/0513/5371b9f7dcb23.jpg"
+                     ms-repeat="article.vpictureurls">
                     <div class="field">
                         <img ms-src="el.preview">
                     </div>

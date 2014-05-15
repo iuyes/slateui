@@ -29,6 +29,11 @@
   .list-right {
     .article-list-box {
       margin-top: @marginValue;
+      min-height: 500px;
+
+      .ui.table td{
+        padding: 0.40em 0.3em;
+      }
 
       .button {
         display: block;
@@ -51,7 +56,7 @@
       }
 
       table tr td:nth-child(1) {
-        width: 10%;
+        width: 5%;
       }
 
       table tr td:nth-child(2) {
@@ -59,14 +64,30 @@
       }
 
       table tr td:nth-child(3) {
-        width: 13%;
+        width: 10%;
+      }
+
+      table tr td:nth-child(4) {
+        width: 10%;
+      }
+
+      table tr td:nth-child(5) {
+        width: 10%;
+      }
+
+      table tr td:nth-child(6) {
+        width: 10%;
+      }
+
+      table tr td:nth-child(7) {
+        width: 10%;
       }
 
       table tr td:nth-child(8) {
-        width: 16%;
+        width: 20%;
       }
 
-      .ui.divider{
+      .ui.divider {
         margin: 0.3rem 0;
       }
     }
@@ -162,4 +183,8 @@
       width: 100%;
     }
   }
+}
+
+[ms-controller], [ms-important], .ms-controller, .ms-important {
+  display: none;
 }

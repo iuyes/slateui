@@ -9,7 +9,7 @@ exports.login = function (req, res, next) {
         var username = req.body.username,
             password = req.body.password;
 
-        res.json({method: 'login', status: 1});
+        res.json({method: 'login', status: 'success'});
     }
 };
 

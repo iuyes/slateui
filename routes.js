@@ -18,6 +18,8 @@ module.exports = function (app) {
     app.get('/logout', userController.logout);
     //应用列表
     app.get('/apps', appController.list);
+    app.get('/apps/get', appController.getApps);
+    app.get('/app/articles', appController.getArticles);
     //tools-文件遍历
     app.get('/tools/directory', toolsController.directory);
     app.post('/tools/upload', toolsController.upload);

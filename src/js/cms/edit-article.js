@@ -33,7 +33,8 @@ seajs.use(
          * 上传图片
          */
         Article.prototype.uploadImg = function (triggerName) {
-            var _this = this;
+            var _this = this,
+                type = triggerName.replace('upload-btn-', '');
 
             new Uploader({
                 trigger: triggerName,
@@ -49,10 +50,17 @@ seajs.use(
                     if (response.status == 'success') {
 
                         for (var i = 0; i < response.images.length; i++) {
+                            response.images[i].title = '';
+                            response.images[i].time = '';
+                            response.images[i].index = '';
+                            response.images[i].des = '';
+
                             if (triggerName.match(/h$/g)) {
                                 _this.articleModel.article.pictureurls.push(response.images[i]);
-                            } else {
+                            } else if (triggerName.match(/v$/g)) {
                                 _this.articleModel.article.vpictureurls.push(response.images[i]);
+                            } else if (triggerName.match(/i$/g)) {
+                                _this.articleModel.article.ipictureurls.push(response.images[i]);
                             }
                         }
 
@@ -90,6 +98,10 @@ seajs.use(
             });
         };
 
+        /**
+         * 提交表单，是一个安全方法
+         * @private
+         */
         Article.prototype._submit_safe = function () {
             var _this = this;
             _this.articleModel.article.loading = true;
@@ -99,8 +111,9 @@ seajs.use(
                     data: JSON.stringify(_this.articleModel.article.$model)
                 }, function (d) {
                     if (d && d.status == 'success') {
-                        $.slateAlert({content: '修改成功'})
+                        $.slateAlert({content: '添加成功'})
                     }
+                    _this.articleModel.article.loading = false;
                 }, 'json');
             } else {
                 $.post(cmsBase.getUrl('editArticle', {
@@ -109,6 +122,7 @@ seajs.use(
                     if (d && d.status == 'success') {
                         $.slateAlert({content: '修改成功'})
                     }
+                    _this.articleModel.article.loading = false;
                 }, 'json');
             }
 
@@ -134,13 +148,17 @@ seajs.use(
             });
 
             $('input.title').blur(function () {
-                var $icon = $(this).next().find('.icon');
+                var $icon = $(this).next().find('.icon'),
+                    $checkRes = $(this).next().next();
                 $icon.removeClass('asterisk').addClass('loading');
                 setTimeout(function () {
                     $icon.removeClass('loading').addClass('asterisk');
                 }, 1000);
-                $.get(cmsBase.getUrl('titleCheck', null), function () {
 
+                $.get(cmsBase.getUrl('titleCheck', null), function (d) {
+                    if (d.status) {
+                        $checkRes.show();
+                    }
                 });
             });
 
@@ -150,44 +168,61 @@ seajs.use(
         };
 
         /**
+         * 绑定MVVM的一些公共方法，是添加和修改的公共方法的提取
+         */
+        Article.prototype.mvvmEvent = function () {
+            var _this = this;
+
+            _this.articleModel.article.removePic = function (index) {
+                _this.articleModel.article.pictureurls.splice(index, 1);
+            };
+            _this.articleModel.article.removePicV = function (index) {
+                _this.articleModel.article.vpictureurls.splice(index, 1);
+            };
+            _this.articleModel.article.addPicDes = function () {
+
+            };
+            setTimeout(function () {
+                _this.articleModel.article.loading = false;
+            }, 5000);
+        };
+
+        /**
          * 采用MVVM做article表单处理
          */
         Article.prototype.articleMvvm = function () {
             var _this = this,
-                id = 26244;
+                id = 26244,
+                articleType = $('title').html().substring(2);
 
             if (!!cmsBase.articleId) {
                 $.get(cmsBase.getUrl('getArticle', {articleId: id}), function (articles) {
                     _this.articleModel = avalon.define('article', function (vm) {
-                        if (!articles[id].data) {
-                            vm.article = {action: '添加文章'};
-                        } else {
-                            vm.article = articles[id].data;
-                            vm.article.action = '修改文章';
-                        }
-
-                        vm.article.removePic = function (index) {
-                            _this.articleModel.article.pictureurls.splice(index, 1);
-                        };
-                        vm.article.removePicV = function (index) {
-                            _this.articleModel.article.vpictureurls.splice(index, 1);
-                        };
-                        vm.article.loading = false;
+                        vm.article = articles[id].data;
+                        vm.article.action = '修改' + articleType;
                     });
+                    _this.mvvmEvent();
                     avalon.scan();
                 }, 'json');
             } else {
                 _this.articleModel = avalon.define('article', function (vm) {
-                    vm.article = {action: '添加文章'};
-
-                    vm.article.removePic = function (index) {
-                        _this.articleModel.article.pictureurls.splice(index, 1);
-                    };
-                    vm.article.removePicV = function (index) {
-                        _this.articleModel.article.vpictureurls.splice(index, 1);
-                    };
-                    vm.article.loading = false;
+                    vm.article = {};
+                    vm.article.title = '';
+                    vm.article.subtitle = '';
+                    vm.article.author = '';
+                    vm.article.author_ename = '';
+                    vm.article.author_title = '';
+                    vm.article.subcontent = '';
+                    vm.article.desc = '';
+                    vm.article.long_desc = '';
+                    vm.article.content = '';
+                    vm.article.pictureurls = [];
+                    vm.article.vpictureurls = [];
+                    vm.article.ipictureurls = [];
+                    vm.article.action = '添加' + articleType;
                 });
+                _this.mvvmEvent();
+
                 avalon.scan();
             }
         };
@@ -197,6 +232,7 @@ seajs.use(
 
             this.uploadImg('.upload-btn-h');    //横版图片
             this.uploadImg('.upload-btn-v');    //竖版图片
+            this.uploadImg('.upload-btn-i');    //iphone图片
             this.formValidate();
             this.bindEvent();
         };

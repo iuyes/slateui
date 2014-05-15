@@ -8,7 +8,7 @@ define(function (require, exports, module) {
         isLogin = true;
 
     var cmsBase = function () {
-        $('.sign-out,.account-settings').popup();
+        $('.sign-out,.account-settings').popup();   //菜单样式
 
         this.urlParse();
     };
@@ -67,6 +67,24 @@ define(function (require, exports, module) {
         if (articleId.length > 20) {
             this.articleId = articleId;
         }
+    };
+
+    /**
+     * 文章类型字典
+     * @param atype
+     * @returns {*}
+     */
+    cmsBase.prototype.getArticleType = function (atype) {
+        return config.articleTypes[atype] ? config.articleTypes[atype] : config.articleTypes[0];
+    };
+
+    /**
+     * 文章状态字典
+     * @param atype
+     * @returns {*}
+     */
+    cmsBase.prototype.getArticleStatus = function (status) {
+        return config.articleStatus[status] ? config.articleStatus[status] : config.articleStatus[0];
     };
 
     module.exports = new cmsBase();

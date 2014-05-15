@@ -38,12 +38,15 @@ seajs.use(['$', 'cms.base.js', 'validation', 'cms.login.css'], function ($, cmsB
             var username = $('.username').val(),
                 password = $('.password').val();
 
+            $('.error').hide();
             $.post(cmsBase.getUrl('login', null), {
                 username: username,
                 password: password
             }, function (d) {
-                if (d.status == 1) {
+                if (d.status == 'success') {
                     location.href = cmsBase.getUrl('appList', null);
+                } else {
+                    $('.error').html('<div class="header">登录失败</div>').show();
                 }
             });
         }
