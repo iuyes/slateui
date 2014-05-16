@@ -25,9 +25,9 @@
         </div>
     </div>
 
-    <div class="ui form segment add-article-form">
-        <div class="header">
-            添加PDF
+    <div class="ui form segment add-article-form loading" ms-class="loading:article.loading" ms-controller="article">
+        <div class="header" ms-if="!article.title">
+            {{article.action}}
         </div>
 
         <div class="form-split-title">基本信息</div>
@@ -36,18 +36,19 @@
                 <label>标题</label>
 
                 <div class="ui labeled icon input">
-                    <input type="text">
+                    <input type="text" name="title" class="title" ms-duplex="article.title">
 
                     <div class="ui corner label">
                         <i class="icon asterisk"></i>
                     </div>
+                    <div class="ui red pointing above ui label check-res">该标题已存在</div>
                 </div>
             </div>
             <div class="field">
                 <label>短标题</label>
 
                 <div class="ui labeled icon input">
-                    <input type="text">
+                    <input type="text" name="subtitle" class="subtitle" ms-duplex="article.subtitle">
 
                     <div class="ui corner label">
                         <i class="icon asterisk"></i>
@@ -61,14 +62,14 @@
                 <label>作者</label>
 
                 <div class="ui labeled icon input">
-                    <input type="text">
+                    <input type="text" name="author" class="author" ms-duplex="article.author">
                 </div>
             </div>
             <div class="field">
                 <label>英文名</label>
 
                 <div class="ui labeled icon input">
-                    <input type="text">
+                    <input type="text" name="author-ename" class="author-ename" ms-duplex="article.author_ename">
                 </div>
             </div>
         </div>
@@ -77,63 +78,101 @@
             <label>头衔</label>
 
             <div class="ui labeled icon input">
-                <input type="text">
+                <input type="text" name="author-title" class="author-title" ms-duplex="article.author_title">
             </div>
         </div>
 
         <div class="form-split-title">文章内容</div>
         <div class="field">
-            <div class="field">
-                <label>摘要</label>
+            <label>摘要</label>
 
-                <textarea></textarea>
+            <textarea ms-duplex="article.desc"></textarea>
+        </div>
+
+        <div class="field content">
+            <label>内容</label>
+
+            <textarea ms-duplex="article.content"></textarea>
+        </div>
+
+        <div class="form-split-title">文章配图</div>
+        <div class="field content">
+            <label>横板配图</label>
+
+            <div class="ui teal small right labeled icon button upload-btn-h">
+                上传图片
+                <i class="photo icon"></i>
             </div>
+            <div class="ui raised segment images-preview-h">
+                <p class="tips" ms-if="!article.pictureurls || article.pictureurls.length == 0">无图片</p>
 
-            <div class="field content">
-                <label>内容</label>
-
-                <textarea></textarea>
-            </div>
-
-            <div class="form-split-title">文章配图，音视频</div>
-            <div class="field content">
-                <label>模板配图</label>
-
-                <div class="ui teal small right labeled icon button">
-                    上传图片
-                    <i class="photo icon"></i>
-                </div>
-            </div>
-            <div class="field content">
-                <label>竖版配图</label>
-
-                <div class="ui teal small right labeled icon button">
-                    上传图片
-                    <i class="photo icon"></i>
-                </div>
-            </div>
-            <div class="form-split-title">上传PDF</div>
-            <div class="field content">
-                <div class="ui teal small right labeled icon button">
-                    上传PDF
-                    <i class="file icon"></i>
+                <div class="ui left floated medium image" ms-repeat="article.pictureurls">
+                    <div class="field">
+                        <img ms-src="el.preview">
+                    </div>
+                    <div class="ui label">
+                        <span ms-title="el.alt">{{el.alt}}</span>
+                        <i class="delete icon" ms-click="article.removePic($index,'h')"></i>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="field content">
+            <label>竖版配图</label>
 
-            <div class="ui divider"></div>
-            <div class="field submit-box">
-                <div class="ui blue right labeled icon button">
-                    提交并关闭
-                    <i class="checkmark icon"></i>
+            <div class="ui teal small right labeled icon button upload-btn-v">
+                上传图片
+                <i class="photo icon"></i>
+            </div>
+            <div class="ui raised segment images-preview-v">
+                <p class="tips" ms-if="!article.vpictureurls || article.vpictureurls.length == 0">无图片</p>
+
+                <div class="ui left floated medium image" ms-repeat="article.vpictureurls">
+                    <div class="field">
+                        <img ms-src="el.preview">
+                    </div>
+                    <div class="ui label">
+                        <span ms-title="el.alt">{{el.alt}}</span>
+                        <i class="delete icon" ms-click="article.removePic($index,'v')"></i>
+                    </div>
                 </div>
-                <div class="ui hover right labeled icon button">
-                    暂时保存
-                    <i class="checkmark icon"></i>
+            </div>
+        </div>
+        <div class="form-split-title">上传PDF</div>
+        <div class="field content">
+            <div class="ui teal small right labeled icon button upload-btn-pdf">
+                上传PDF
+                <i class="file icon"></i>
+            </div>
+            <div class="ui raised segment images-preview-pdf">
+                <p class="tips" ms-if="!article.pdfs || article.pdfs.length == 0">无PDF</p>
+
+                <div class="ui left floated medium image" ms-repeat="article.pdfs">
+                    <div class="field">
+                        <input type="text" ms-duplex="el.path" class="pdf-url">
+                        <input type="text" ms-duplex="el.index" class="pdf-index">
+
+                        <div class="ui small right icon button" ms-click="article.removePdf($index)">
+                            删除
+                        </div>
+                    </div>
                 </div>
-                <div class="ui red right labeled icon button fn-right">
-                    取消
-                    <i class="sign out icon"></i>
-                </div>
+            </div>
+        </div>
+
+        <div class="ui divider"></div>
+        <div class="field submit-box">
+            <div class="ui blue submit right labeled icon button submit-article">
+                提交并关闭
+                <i class="checkmark icon"></i>
+            </div>
+            <div class="ui hover right labeled icon button submit-article">
+                暂时保存
+                <i class="checkmark icon"></i>
+            </div>
+            <div class="ui red right labeled icon button fn-right">
+                取消
+                <i class="sign out icon"></i>
             </div>
         </div>
 

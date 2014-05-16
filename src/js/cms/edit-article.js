@@ -5,6 +5,7 @@ seajs.config({
         'mustache': 'gallery/mustache/0.8.1/mustache',
         'cms.base.js': 'slate/cms-base/1.0.0/cms-base',
         'upload': 'slate/upload/1.0.0/upload',
+        'dropdown': 'slate/dropdown/1.0.0/dropdown',
         'inputcount': 'slate/inputcount/1.0.0/inputcount',
         'validation': 'slate/validation/1.0.0/validation',
         'avalon': 'slate/avalon/1.0.0/avalon.mobile',
@@ -19,6 +20,7 @@ seajs.use(
         'cms.base.js',
         'upload',
         'avalon',
+        'dropdown',
         'validation',
         'inputcount',
         'edit.article.css'
@@ -38,36 +40,43 @@ seajs.use(
 
             new Uploader({
                 trigger: triggerName,
-                name: 'image',
-                action: cmsBase.getUrl('uploadImg', null),
-                accept: 'image/*',
+                name: triggerName.match(/video/) ? 'video[]' : 'image[]',
+                action: triggerName.match(/video/) ? cmsBase.getUrl('uploadVideo', null) : cmsBase.getUrl('uploadImg', null),
+                accept: triggerName.match(/video/) ? 'video/*,audio/*' : (triggerName.match(/pdf/) ? 'application/pdf' : 'image/*' ),
                 data: {},
                 multiple: true,
                 error: function (file) {
-                    console.log(file);
+                    cmsBase.log(file);
                 },
                 success: function (response) {
-                    if (response.status == 'success') {
+                    var images = response.success;
+                    if (!!images && images.length > 0) {
 
-                        for (var i = 0; i < response.images.length; i++) {
-                            response.images[i].title = '';
-                            response.images[i].time = '';
-                            response.images[i].index = '';
-                            response.images[i].des = '';
+                        for (var i = 0; i < images.length; i++) {
+                            images[i].title = '';
+                            images[i].time = '';
+                            images[i].index = '';
+                            images[i].des = '';
 
                             if (triggerName.match(/h$/g)) {
-                                _this.articleModel.article.pictureurls.push(response.images[i]);
+                                _this.articleModel.article.pictureurls.push(images[i]);
                             } else if (triggerName.match(/v$/g)) {
-                                _this.articleModel.article.vpictureurls.push(response.images[i]);
+                                _this.articleModel.article.vpictureurls.push(images[i]);
                             } else if (triggerName.match(/i$/g)) {
-                                _this.articleModel.article.ipictureurls.push(response.images[i]);
+                                _this.articleModel.article.ipictureurls.push(images[i]);
+                            } else if (triggerName.match(/video/)) {
+                                _this.articleModel.article.videos.push(images[i]);
+                                $('.ui.dropdown').dropdown();
+                            } else if (triggerName.match(/pdf/)) {
+                                images[i].index = _this.articleModel.article.pdfs.length + 1;
+                                _this.articleModel.article.pdfs.push(images[i]);
                             }
                         }
 
                     }
                 },
                 progress: function (event, position, total, percent, files) {
-                    console.log(files);
+                    cmsBase.log(files);
                 }
             });
         };
@@ -104,7 +113,6 @@ seajs.use(
          */
         Article.prototype._submit_safe = function () {
             var _this = this;
-            _this.articleModel.article.loading = true;
 
             if (!cmsBase.articleId) {
                 $.post(cmsBase.getUrl('addArticle', null), {
@@ -113,7 +121,6 @@ seajs.use(
                     if (d && d.status == 'success') {
                         $.slateAlert({content: '添加成功'})
                     }
-                    _this.articleModel.article.loading = false;
                 }, 'json');
             } else {
                 $.post(cmsBase.getUrl('editArticle', {
@@ -122,7 +129,6 @@ seajs.use(
                     if (d && d.status == 'success') {
                         $.slateAlert({content: '修改成功'})
                     }
-                    _this.articleModel.article.loading = false;
                 }, 'json');
             }
 
@@ -163,8 +169,14 @@ seajs.use(
             });
 
             $('.submit-article').click(function () {
-                _this._submit_safe();
+                setTimeout(function () {
+                    if ($('.field.error').length == 0) {
+                        _this._submit_safe();
+                    }
+                }, 100);
             });
+
+            $('.ui.dropdown').dropdown();
         };
 
         /**
@@ -172,19 +184,15 @@ seajs.use(
          */
         Article.prototype.mvvmEvent = function () {
             var _this = this;
+            _this.articleModel.article.loading = true;
+            _this.articleModel.article.loading = false;
 
-            _this.articleModel.article.removePic = function (index) {
-                _this.articleModel.article.pictureurls.splice(index, 1);
+            _this.articleModel.article.removePic = function (index, type) {
+                _this.articleModel.article[(type == 'h' ? '' : type) + 'pictureurls'].splice(index, 1);
             };
-            _this.articleModel.article.removePicV = function (index) {
-                _this.articleModel.article.vpictureurls.splice(index, 1);
+            _this.articleModel.article.removePdf = function (index) {
+                _this.articleModel.article.pdfs.splice(index, 1);
             };
-            _this.articleModel.article.addPicDes = function () {
-
-            };
-            setTimeout(function () {
-                _this.articleModel.article.loading = false;
-            }, 5000);
         };
 
         /**
@@ -192,7 +200,7 @@ seajs.use(
          */
         Article.prototype.articleMvvm = function () {
             var _this = this,
-                id = 26244,
+                id = '537345238c3b8ed719000002',
                 articleType = $('title').html().substring(2);
 
             if (!!cmsBase.articleId) {
@@ -216,9 +224,13 @@ seajs.use(
                     vm.article.desc = '';
                     vm.article.long_desc = '';
                     vm.article.content = '';
+                    vm.article.video = '';
+                    vm.article.videoTime = '';
                     vm.article.pictureurls = [];
                     vm.article.vpictureurls = [];
                     vm.article.ipictureurls = [];
+                    vm.article.videos = [];
+                    vm.article.pdfs = [];
                     vm.article.action = '添加' + articleType;
                 });
                 _this.mvvmEvent();
@@ -233,8 +245,11 @@ seajs.use(
             this.uploadImg('.upload-btn-h');    //横版图片
             this.uploadImg('.upload-btn-v');    //竖版图片
             this.uploadImg('.upload-btn-i');    //iphone图片
+            this.uploadImg('.upload-btn-video');    //iphone图片
+            this.uploadImg('.upload-btn-pdf');
             this.formValidate();
             this.bindEvent();
+
         };
 
         $(function () {

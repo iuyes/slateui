@@ -28,6 +28,8 @@ module.exports = function (app) {
     //文章管理
     app.get('/article/add', articleController.add);
     app.get('/article/edit/:id', articleController.add);
+    app.get('/video/add', articleController.add);
+    app.get('/video/edit/:id', articleController.add);
     app.get('/pdf/add', articleController.add);
     app.get('/pdf/edit/:id', articleController.add);
     app.get('/pictures/add', articleController.add);
@@ -36,6 +38,7 @@ module.exports = function (app) {
 
     app.post('/content/add', articleController.addArticle);
     app.post('/content/edit/:id', articleController.editArticle);
+    app.get('/content/set/:id', articleController.setArticle);
 
     //前端管理
     app.get('/front/templates', frontController.templates); //模板文件管理

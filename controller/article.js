@@ -40,14 +40,15 @@ exports.addArticle = function (req, res, next) {
  * @param next
  */
 exports.getArticle = function (req, res, next) {
+    var id = req.param('id');
 
-    Article.get({_id: '537384992ea486c28f000001'}, function (err, articles) {
+    Article.get({_id: id}, function (err, articles) {
         if (err) {
             return next;
         } else {
             var article = {};
-            article[req.param('id')] = {
-                "id": req.param('id'),
+            article[id] = {
+                "id": id,
                 "data": articles[0],
                 "inputtime": "1382671469",
                 "updatetime": "2014-05-12 17:11:06",
@@ -76,4 +77,9 @@ exports.editArticle = function (req, res, next) {
         console.log(a);
         console.log(b);
     });
+};
+
+
+exports.setArticle = function (req, res, next) {
+    res.render('set-article');
 };

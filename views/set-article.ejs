@@ -3,7 +3,7 @@
 <head lang="en">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8">
-    <title>添加文章</title>
+    <title>文章设置</title>
     <% for (var i = 0;i < global.slateUI.length; i++){ %>
     <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %> <%= global.slateUI[i] %>">
     <% } %>
@@ -20,13 +20,13 @@
             <div class="divider"> /</div>
             <div class="section">内容发布器管理</div>
             <div class="divider"> /</div>
-            <div class="active section">添加内容</div>
+            <div class="active section">文章设置</div>
         </div>
     </div>
 
-    <div class="ui form segment add-article-form loading" ms-class="loading:article.loading" ms-controller="article">
-        <div class="header" ms-if="!article.title">
-            {{article.action}}
+    <div class="ui form segment add-article-form">
+        <div class="header">
+            文章设置
         </div>
 
         <div class="form-split-title">基本信息</div>

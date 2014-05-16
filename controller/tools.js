@@ -17,7 +17,7 @@ exports.upload = function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Allow-Origin', '*');
 
-    var images = [],
+    var success = [],
         files = [];
     if (req.files.image instanceof Array) {
         Array.prototype.push.apply(files, req.files.image);
@@ -26,7 +26,7 @@ exports.upload = function (req, res, next) {
     }
 
     for (var i = 0; i < files.length; i++) {
-        images.push({
+        success.push({
             "url": files[i].path.replace('src', ''),
             "preview": "http://127.0.0.1:3000/" + files[i].path.replace('src', ''),
             "alt": files[i].originalFilename
@@ -35,7 +35,7 @@ exports.upload = function (req, res, next) {
 
     res.json({
         status: 'success',
-        images: images
+        success: success
     });
 
 };

@@ -25,6 +25,9 @@
     height: 8em;
     min-height: 8em;
   }
+  .field .video-input {
+    width: 350px !important;
+  }
   .field.submit-box {
     margin: 2em 0;
   }
@@ -93,13 +96,14 @@
 
   .ui.medium.image.img-select {
     padding: 10px;
-    width: 100%;
+    width: 98.5%;
 
     .preview-left {
       position: absolute;
       width: 160px;
       left: 10px;
       top: 10px;
+      overflow: hidden;
     }
 
     .preview-right {
@@ -109,12 +113,31 @@
         height: auto;
       }
 
-      textarea{
+      textarea {
         min-height: 5em;
         height: 5em;
       }
     }
 
+  }
+
+  .images-preview-pdf {
+    width: 100%;
+    .medium {
+      width: 98%;
+      padding: 1% 1% 0;
+
+      input:nth-child(1) {
+        width: 850px;
+      }
+      input:nth-child(2) {
+        width: 200px;
+      }
+    }
+  }
+
+  .field input.video-url {
+    width: 900px;
   }
 
 }

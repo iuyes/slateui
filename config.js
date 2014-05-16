@@ -51,8 +51,8 @@ module.exports = {
         "/ui/cms-base/src/cms-base.css"
     ],
     getMongoUri: function () {
-//        return "mongodb://localhost/slate";
-        return "mongodb://root:hjmfeeloc1989mongo@ds049198.mongolab.com:49198/slate";
+        return "mongodb://root:root@127.0.0.1/slate";
+//        return "mongodb://root:hjmfeeloc1989mongo@ds049198.mongolab.com:49198/slate";
 //        return "mongodb://root:hjmfeeloc1989mongo@alex.mongohq.com:10087/feeloc03";
     }
 }

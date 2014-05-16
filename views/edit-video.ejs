@@ -3,7 +3,7 @@
 <head lang="en">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8">
-    <title>添加文章</title>
+    <title>添加视频</title>
     <% for (var i = 0;i < global.slateUI.length; i++){ %>
     <link type="text/css" rel="stylesheet" href="<%= global.staticDomain %> <%= global.slateUI[i] %>">
     <% } %>
@@ -92,16 +92,32 @@
 
             <textarea ms-duplex="article.desc"></textarea>
         </div>
-        <div class="field">
-            <label>长摘要</label>
-
-            <textarea ms-duplex="article.long_desc"></textarea>
-        </div>
-
         <div class="field content">
             <label>内容</label>
 
             <textarea ms-duplex="article.content"></textarea>
+        </div>
+        <div class="fields two">
+            <div class="field">
+                <label>视频地址</label>
+                <input type="text" ms-duplex="article.video" class="video-input"/>
+
+                <div class="ui teal small right labeled icon button">
+                    <span class="upload-btn-video">上传视频</span>
+                    <div class="ui teal floating dropdown icon button">
+                        <i class="dropdown icon"></i>
+
+                        <div class="menu">
+                            <div class="item" ms-data-url="el.mp4"><i class="video icon"></i>mp4</div>
+                            <div class="item" ms-data-url="el.ogg"><i class="video icon"></i>ogg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>播放时长</label>
+                <input type="text" ms-duplex="article.videoTime"/>
+            </div>
         </div>
 
         <div class="form-split-title">文章配图，音视频</div>
@@ -115,7 +131,7 @@
             <div class="ui raised segment images-preview-h">
                 <p class="tips" ms-if="!article.pictureurls || article.pictureurls.length == 0">无图片</p>
 
-                <div class="ui left floated medium image" ms-data-id="el.aid" ms-repeat="article.pictureurls">
+                <div class="ui left floated medium image" ms-repeat="article.pictureurls">
                     <div class="field">
                         <img ms-src="el.preview">
                     </div>
@@ -136,42 +152,12 @@
             <div class="ui raised segment images-preview-v">
                 <p class="tips" ms-if="!article.vpictureurls || article.vpictureurls.length == 0">无图片</p>
 
-                <div class="ui left floated medium image" ms-data-id="el.aid" ms-repeat="article.vpictureurls">
+                <div class="ui left floated medium image" ms-repeat="article.vpictureurls">
                     <div class="field">
                         <img ms-src="el.preview">
                     </div>
                     <div class="ui label">
                         <span ms-title="el.alt">{{el.alt}}</span>
-                        <i class="delete icon" ms-click="article.removePic($index,'v')"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="field content">
-            <label>音视频</label>
-
-            <div class="ui teal small right labeled icon button upload-btn-video">
-                上传音频，视频
-                <i class="video icon"></i>
-            </div>
-            <div class="ui raised segment images-preview-video">
-                <p class="tips" ms-if="!article.videos || article.videos.length == 0">无音频或视频</p>
-
-                <div class="ui left floated medium video" ms-data-id="el.aid" ms-repeat="article.videos">
-                    <div class="field">
-                        <input type="text" class="video-url" ms-duplex="el.preview" placeholder="el.preview"/>
-
-                        <div class="ui teal buttons small">
-                            <div class="ui button">请选择视频格式</div>
-                            <div class="ui teal floating dropdown icon button">
-                                <i class="dropdown icon"></i>
-
-                                <div class="menu">
-                                    <div class="item" ms-data-url="el.mp4"><i class="video icon"></i>mp4</div>
-                                    <div class="item" ms-data-url="el.ogg"><i class="video icon"></i>ogg</div>
-                                </div>
-                            </div>
-                        </div>
                         <i class="delete icon" ms-click="article.removePic($index,'v')"></i>
                     </div>
                 </div>

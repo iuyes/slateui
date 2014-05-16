@@ -10,6 +10,11 @@ define(function (require, exports, module) {
     var cmsBase = function () {
         $('.sign-out,.account-settings').popup();   //菜单样式
 
+        // 自动获取的参数列表
+        this.args = {
+            appid: '1'
+        };
+
         this.urlParse();
     };
 
@@ -20,6 +25,7 @@ define(function (require, exports, module) {
      * @returns {*}
      */
     cmsBase.prototype.getUrl = function (name, args) {
+        args = $.extend(this.args, args);
         var url = config.env == 'dev' ? config.devUrls[name] : config.urls[name];
         if (!!args) {
             for (var arg in args) {
@@ -85,6 +91,16 @@ define(function (require, exports, module) {
      */
     cmsBase.prototype.getArticleStatus = function (status) {
         return config.articleStatus[status] ? config.articleStatus[status] : config.articleStatus[0];
+    };
+
+    /**
+     * 调试信息
+     * @param log
+     */
+    cmsBase.prototype.log = function (log) {
+        if (window.console && config.env == 'dev') {
+            console.log(log);
+        }
     };
 
     module.exports = new cmsBase();
